@@ -1,5 +1,7 @@
 # Tavoryxa — مساحة ليومك / Make room for your day
 
+[![Validate demo](https://github.com/abomosaa/tavoryxa/actions/workflows/ci.yml/badge.svg)](https://github.com/abomosaa/tavoryxa/actions/workflows/ci.yml)
+
 <div dir="rtl" align="right">
 
 متجر عرض عربي وإنجليزي لثمانية منتجات مكتبية خيالية. يتضمن تصفح الفئات والبحث والترتيب وتفاصيل المنتج وسلة محفوظة والكمية والحذف وطلبًا تجريبيًا وسجل طلبات. الرسومات SVG محلية أصلية؛ لا بيع أو دفع أو شحن حقيقي، ولا تُجمع بيانات بطاقة أو عنوان.
@@ -15,6 +17,8 @@ A complete Arabic-first / English storefront demo with eight fictional desk obje
 Published on Cloudflare with a successful public HTTP response. Build, TypeScript, nine cart/checkout/storage tests, browser checkout + persistence + bilingual/mobile navigation passed; no page errors or horizontal overflow at 390/820/1440px. Live SQL isolation/trusted-price assertions passed. Visitor GitHub provider setup remains pending.
 
 [Live demo / العرض المباشر](https://tavoryxa.qirvexa.workers.dev) · [Source / المصدر](https://github.com/abomosaa/tavoryxa)
+
+![Arabic storefront / واجهة المتجر العربية](qa/screenshots/capture/shots/desktop-fold.png)
 
 ## Run / التشغيل
 
