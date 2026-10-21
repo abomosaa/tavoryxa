@@ -1,0 +1,51 @@
+{
+  "target": "http://127.0.0.1:5174/",
+  "url": "http://127.0.0.1:5174/",
+  "capturedAt": "2026-10-21T20:13:58.402Z",
+  "viewports": {
+    "desktop": {
+      "size": [
+        1440,
+        900
+      ],
+      "full": "capture/shots/desktop-full.png",
+      "fold": "capture/shots/desktop-fold.png",
+      "overflowX": false
+    },
+    "tablet": {
+      "size": [
+        820,
+        1180
+      ],
+      "full": "capture/shots/tablet-full.png",
+      "fold": "capture/shots/tablet-fold.png",
+      "overflowX": false
+    },
+    "mobile": {
+      "size": [
+        390,
+        844
+      ],
+      "full": "capture/shots/mobile-full.png",
+      "fold": "capture/shots/mobile-fold.png",
+      "overflowX": false
+    }
+  },
+  "console": [
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+  ],
+  "errors": [],
+  "requests": {
+    "count": 30,
+    "failed": [],
+    "bytes": 2805030,
+    "types": {
+      "document": 1,
+      "script": 25,
+      "font": 4
+    }
+  }
+}

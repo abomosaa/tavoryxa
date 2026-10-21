@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.wrangler/
+.impeccable/
+.env*
+research/
+qa/screenshots/
+qa/flow/
+qa/audit/
+*.tsbuildinfo

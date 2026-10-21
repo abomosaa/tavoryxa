@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.env
+.env.local
+.env.*.local
+.wrangler/
+research/
+qa/screenshots/capture/dom.html
+qa/screenshots/capture/scan.json
+*.tsbuildinfo

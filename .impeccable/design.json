@@ -1,0 +1,259 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-21T20:20:28.392Z",
+  "title": "Design System: Tavoryxa",
+  "extensions": {
+    "colorMeta": {
+      "paper": {
+        "role": "neutral",
+        "displayName": "Warm Paper",
+        "canonical": "#f7f3eb",
+        "tonalRamp": [
+          "oklch(15% 0.0114 84.58)",
+          "oklch(26% 0.0114 84.58)",
+          "oklch(38% 0.0114 84.58)",
+          "oklch(49% 0.0114 84.58)",
+          "oklch(61% 0.0114 84.58)",
+          "oklch(72% 0.0114 84.58)",
+          "oklch(84% 0.0114 84.58)",
+          "oklch(95% 0.0114 84.58)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Charcoal Ink",
+        "canonical": "#292820",
+        "tonalRamp": [
+          "oklch(15% 0.0143 101.40)",
+          "oklch(26% 0.0143 101.40)",
+          "oklch(38% 0.0143 101.40)",
+          "oklch(49% 0.0143 101.40)",
+          "oklch(61% 0.0143 101.40)",
+          "oklch(72% 0.0143 101.40)",
+          "oklch(84% 0.0143 101.40)",
+          "oklch(95% 0.0143 101.40)"
+        ]
+      },
+      "accent": {
+        "role": "primary",
+        "displayName": "Paprika",
+        "canonical": "#a5442d",
+        "tonalRamp": [
+          "oklch(15% 0.1337 34.67)",
+          "oklch(26% 0.1337 34.67)",
+          "oklch(38% 0.1337 34.67)",
+          "oklch(49% 0.1337 34.67)",
+          "oklch(61% 0.1337 34.67)",
+          "oklch(72% 0.1337 34.67)",
+          "oklch(84% 0.1337 34.67)",
+          "oklch(95% 0.1337 34.67)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted Ink",
+        "canonical": "#69675d",
+        "tonalRamp": [
+          "oklch(15% 0.0156 97.64)",
+          "oklch(26% 0.0156 97.64)",
+          "oklch(38% 0.0156 97.64)",
+          "oklch(49% 0.0156 97.64)",
+          "oklch(61% 0.0156 97.64)",
+          "oklch(72% 0.0156 97.64)",
+          "oklch(84% 0.0156 97.64)",
+          "oklch(95% 0.0156 97.64)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Paper Rule",
+        "canonical": "#dcd7cb",
+        "tonalRamp": [
+          "oklch(15% 0.0171 88.01)",
+          "oklch(26% 0.0171 88.01)",
+          "oklch(38% 0.0171 88.01)",
+          "oklch(49% 0.0171 88.01)",
+          "oklch(61% 0.0171 88.01)",
+          "oklch(72% 0.0171 88.01)",
+          "oklch(84% 0.0171 88.01)",
+          "oklch(95% 0.0171 88.01)"
+        ]
+      },
+      "sage": {
+        "role": "neutral",
+        "displayName": "Quiet Sage",
+        "canonical": "#dce1d6",
+        "tonalRamp": [
+          "oklch(15% 0.0157 126.84)",
+          "oklch(26% 0.0157 126.84)",
+          "oklch(38% 0.0157 126.84)",
+          "oklch(49% 0.0157 126.84)",
+          "oklch(61% 0.0157 126.84)",
+          "oklch(72% 0.0157 126.84)",
+          "oklch(84% 0.0157 126.84)",
+          "oklch(95% 0.0157 126.84)"
+        ]
+      },
+      "soft": {
+        "role": "neutral",
+        "displayName": "Soft Material",
+        "canonical": "#eee8dc",
+        "tonalRamp": [
+          "oklch(15% 0.0173 84.59)",
+          "oklch(26% 0.0173 84.59)",
+          "oklch(38% 0.0173 84.59)",
+          "oklch(49% 0.0173 84.59)",
+          "oklch(61% 0.0173 84.59)",
+          "oklch(72% 0.0173 84.59)",
+          "oklch(84% 0.0173 84.59)",
+          "oklch(95% 0.0173 84.59)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display-ar": {
+        "displayName": "Arabic display",
+        "purpose": "Arabic editorial hero."
+      },
+      "display-en": {
+        "displayName": "English display",
+        "purpose": "English serif hero."
+      },
+      "title-ar": {
+        "displayName": "Arabic section heading",
+        "purpose": "Arabic editorial sections."
+      },
+      "title-en": {
+        "displayName": "English section heading",
+        "purpose": "English editorial sections; dialogs remain sans."
+      },
+      "product-title": {
+        "displayName": "Product name",
+        "purpose": "Compact catalogue titles."
+      }
+    },
+    "shadows": [
+      {
+        "name": "modal",
+        "value": "0 24px 80px #29282033",
+        "purpose": "Native modal overlay."
+      },
+      {
+        "name": "toast",
+        "value": "0 8px 25px #29282026",
+        "purpose": "Transient confirmation."
+      }
+    ],
+    "motion": [
+      {
+        "name": "primary",
+        "value": "background .18s,transform .18s",
+        "purpose": "Primary feedback and subtle lift."
+      },
+      {
+        "name": "illustration",
+        "value": "transform .28s ease",
+        "purpose": "Product illustration hover scaling."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "wide",
+        "value": "1500px",
+        "query": "min-width"
+      },
+      {
+        "name": "compact",
+        "value": "1100px",
+        "query": "max-width"
+      },
+      {
+        "name": "mobile",
+        "value": "750px",
+        "query": "max-width"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Catalogue and checkout action.",
+      "html": "<button class=\"ds-primary\">تصفّح المجموعة</button>",
+      "css": ".ds-primary{font:600 13px 'Noto Sans Arabic','DM Sans',sans-serif;background:var(--accent,#a5442d);color:#fffaf1;border:0;border-radius:var(--radius,3px);padding:12px 24px;min-height:48px;cursor:pointer;transition:background .18s,transform .18s}.ds-primary:hover{background:#873622;transform:translateY(-1px)}.ds-primary:focus-visible{outline:2px solid var(--accent,#a5442d);outline-offset:4px}@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Quiet secondary action.",
+      "html": "<button class=\"ds-secondary\">متابعة التصفح</button>",
+      "css": ".ds-secondary{font:13px 'Noto Sans Arabic','DM Sans',sans-serif;background:transparent;color:var(--ink,#292820);border:1px solid var(--line,#dcd7cb);border-radius:var(--radius,3px);padding:10px 20px;min-height:44px;cursor:pointer}.ds-secondary:hover{background:var(--soft,#eee8dc)}.ds-secondary:focus-visible{outline:2px solid var(--accent,#a5442d);outline-offset:4px}@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}"
+    },
+    {
+      "name": "Input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Simulated checkout field.",
+      "html": "<label class=\"ds-field\" dir=\"rtl\">اسم العرض<input placeholder=\"اسم تجريبي\"></label>",
+      "css": ".ds-field{font:12px 'Noto Sans Arabic','DM Sans',sans-serif;color:var(--ink,#292820);display:flex;flex-direction:column;gap:9px}.ds-field input{font:inherit;background:#fffaf0;color:var(--ink,#292820);border:1px solid #b4aa97;border-radius:var(--radius,3px);min-height:46px;padding:10px 14px;caret-color:var(--accent,#a5442d)}.ds-field input:hover{border-color:var(--accent,#a5442d)}.ds-field input:focus-visible{outline:2px solid var(--accent,#a5442d);outline-offset:4px}@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}"
+    },
+    {
+      "name": "Category Navigation",
+      "kind": "nav",
+      "description": "Underlined selected catalogue category.",
+      "html": "<nav class=\"ds-tabs\" dir=\"rtl\" aria-label=\"الفئات\"><button class=\"ds-current\" aria-current=\"page\">الكل</button><button>تنظيم المكتب</button></nav>",
+      "css": ".ds-tabs{display:flex;gap:19px;border-bottom:1px solid var(--line,#dcd7cb);padding-bottom:15px}.ds-tabs button{font:12px 'Noto Sans Arabic','DM Sans',sans-serif;color:var(--muted,#69675d);padding:9px 0;min-height:44px;background:none;border:0;position:relative;cursor:pointer}.ds-tabs .ds-current{color:var(--accent,#a5442d);font-weight:600}.ds-tabs .ds-current:after{content:'';position:absolute;bottom:-16px;inset-inline:0;height:2px;background:var(--accent,#a5442d)}.ds-tabs button:hover{color:var(--accent,#a5442d)}.ds-tabs button:focus-visible{outline:2px solid var(--accent,#a5442d);outline-offset:4px}@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}"
+    },
+    {
+      "name": "Cart Count",
+      "kind": "chip",
+      "description": "Circular count adjacent to the bag control.",
+      "html": "<span class=\"ds-count\" aria-label=\"قطعتان في السلة\">2</span>",
+      "css": ".ds-count{display:inline-block;background:var(--ink,#292820);color:var(--paper,#f7f3eb);height:20px;min-width:20px;text-align:center;border-radius:50%;font:11px/20px 'DM Sans',sans-serif}@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}"
+    },
+    {
+      "name": "Product Card",
+      "kind": "card",
+      "description": "Illustrated product, compact name, price, and add control.",
+      "html": "<article class=\"ds-product\" dir=\"rtl\"><button class=\"ds-art\" aria-label=\"عرض الدفتر\"><svg viewBox=\"0 0 400 350\" aria-hidden=\"true\" focusable=\"false\"><ellipse cx=\"206\" cy=\"288\" rx=\"116\" ry=\"12\" fill=\"#292820\" opacity=\".08\"/><g transform=\"rotate(-12 200 175)\"><rect x=\"110\" y=\"57\" width=\"179\" height=\"224\" rx=\"5\" fill=\"#e8decb\"/><rect x=\"103\" y=\"48\" width=\"179\" height=\"226\" rx=\"5\" fill=\"#a5442d\"/><path d=\"M119 49v224\" stroke=\"#783220\" stroke-width=\"3\"/><rect x=\"146\" y=\"95\" width=\"95\" height=\"54\" fill=\"#f7f3eb\"/><path d=\"M160 112h67m-67 12h45m-45 10h56\" stroke=\"#a84932\" stroke-width=\"2\"/><path d=\"M259 48v227\" stroke=\"#61331e\" stroke-width=\"5\"/><path d=\"M140 274v24l9-6 9 6v-24\" fill=\"#e1b886\"/></g></svg></button><div class=\"ds-info\"><div><h3>دفتر يومي</h3><p>رسم توضيحي · منتج تجريبي</p></div><button class=\"ds-add\" aria-label=\"إضافة الدفتر\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"M5 12h14M12 5v14\"/></svg></button></div><div class=\"ds-price\">74 ر.س</div></article>",
+      "css": ".ds-product{font-family:'Noto Sans Arabic','DM Sans',sans-serif;color:var(--ink,#292820);max-width:270px}.ds-art{display:block;width:100%;aspect-ratio:1/1.06;background:#eae5da;border:0;padding:0;overflow:hidden;cursor:pointer}.ds-art svg{width:100%;height:100%;transition:transform .28s ease}.ds-art:hover svg{transform:scale(1.05)}.ds-art:focus-visible{outline:2px solid var(--accent,#a5442d);outline-offset:4px}.ds-info{display:flex;align-items:start;justify-content:space-between;gap:5px;margin-top:14px}.ds-info h3{font-size:14px;font-weight:600;line-height:1.8;margin:0}.ds-info p{font-size:11px;color:var(--muted,#69675d);line-height:1.8;margin:4px 0 0}.ds-add{font:18px 'DM Sans',sans-serif;min-width:40px;min-height:44px;background:none;border:1px solid var(--line,#dcd7cb);color:inherit;cursor:pointer;transition:background .18s}.ds-add:hover{background:var(--accent,#a5442d);color:var(--paper,#f7f3eb);border-color:var(--accent,#a5442d)}.ds-add:focus-visible{outline:2px solid var(--accent,#a5442d);outline-offset:4px}.ds-price{font-size:12px;font-weight:600;font-variant-numeric:tabular-nums;margin-top:10px}@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}.ds-add{display:flex;align-items:center;justify-content:center}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Warm Stationery Shelf",
+    "overview": "Warm paper, paprika ink, and pale desk materials frame an editorial browsing experience. Local source-native SVG still lifes establish the product world; familiar controls keep cart and simulated checkout practical. This is an original fictional identity, with shadcn research informing control discipline only.",
+    "keyCharacteristics": [
+      "Warm paper and restrained paprika contrast.",
+      "Illustrated desk objects with generous breathing room.",
+      "Arabic-first typography with an English editorial serif."
+    ],
+    "rules": [
+      {
+        "name": "The Material Field Rule",
+        "body": "Give product illustrations calm tonal fields rather than decorative interface shadows.",
+        "section": "neutral"
+      },
+      {
+        "name": "The Language Role Rule",
+        "body": "Keep the serif in English editorial headings while Arabic and operational controls use their established sans families.",
+        "section": "typography"
+      },
+      {
+        "name": "The Direction Rule",
+        "body": "Arabic RTL and English LTR share logical spacing and start/end alignment; illustrated still-life compositions retain their intended object orientation.",
+        "section": "layout"
+      }
+    ],
+    "dos": [
+      "Do preserve Arabic-first RTL and complete English layouts.",
+      "Do present the local SVG objects as illustrations.",
+      "Do keep cart totals and checkout actions easy to scan."
+    ],
+    "donts": [
+      "Don't add decorative shadows to product cards.",
+      "Don't imply real payment, shipping, testimonials, or sales from the fictional demo."
+    ]
+  }
+}

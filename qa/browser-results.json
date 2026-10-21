@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "flows": [
+    "cart add and quantity",
+    "guest checkout and confirmation",
+    "persistent order after reload",
+    "empty search and reset",
+    "English switch",
+    "mobile order navigation"
+  ],
+  "widths": [
+    390,
+    820,
+    1440
+  ],
+  "languages": [
+    "ar",
+    "en"
+  ],
+  "pageErrors": []
+}
