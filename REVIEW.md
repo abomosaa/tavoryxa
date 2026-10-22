@@ -1,5 +1,15 @@
 # Review and verification / المراجعة والتحقق
 
+## Current release status — 2026-10-22 / حالة الإصدار الحالي
+
+The main agent completed review of the authentication source, immutable recovery-owner Bearer and 15-second recovery request timeout. Auth release [5bfbfb1](https://github.com/abomosaa/tavoryxa/commit/5bfbfb1) is deployed as Cloudflare version `5f9b5286-19b1-4c58-8482-6afe12e03efb`; [CI 39772228693 succeeded](https://github.com/abomosaa/tavoryxa/actions/runs/39772228693).
+
+Live email delivery and Google/GitHub OAuth remain unverified. Email-delivery gate is false; both external providers are disabled. Brevo was chosen (300 emails/day); sender verification and the user's direct SMTP-login/SMTP-key entry in Supabase are pending. This release status does not replace the historical original baseline below or claim a completed external login/email test.
+
+The lead inspected the newly deployed Arabic account panel: email/password sign-in is visible, signup explains the temporary delivery restriction, unavailable providers are absent, and guest access stays available. / فُحصت واجهة الحسابات المنشورة الجديدة وبوابة التسجيل ووضع الضيف؛ هذا فحص واجهة دون دخول أو بريد حقيقي.
+
+<div dir="rtl" align="right">اكتملت مراجعة المصدر وجلسة الاستعادة الثابتة ومهلة الطلب. نُشر تحديث الحسابات بالإصدار المذكور ونجح CI. لم يُختبر البريد أو OAuth فعليًا؛ بوابة البريد معطلة والمزودان غير مفعلين. اختير Brevo بحد 300 رسالة يوميًا، وما زال تحقق المرسل وإدخال المستخدم لبيانات SMTP مباشرة في Supabase معلقين. يبقى سجل الخط الأساسي الأصلي أدناه محفوظًا.</div>
+
 ## 2026-10-22 — Authentication update / تحديث الحسابات
 
 - Source checks: format/typecheck, 15 unit tests and build; new tests cover strict provider flags, unusable settings, password confirmation, safe error codes, pre-dispatch recovery invalidation and fixed-owner Bearer.
@@ -7,9 +17,9 @@
 - Installed SDK fixture: `qa/auth-pkce.cjs` uses the real pinned Supabase SDK, intercepts all Auth requests, initiates PKCE reset, exchanges the callback, receives recovery before/around React startup, completes the fixed-owner password PUT and cleans the callback URL.
 - Existing shopping and auth-isolation browser packets passed after integration. Screenshots `qa/auth/` were inspected at mobile size.
 - Root's cross-tab recovery review finding was addressed by avoiding mutable singleton `updateUser()` for password mutation. The event owner/token is captured in memory and checked before a fixed-Bearer request.
-- External: no live registration/reset email, Google/GitHub completion or deployment of this update was performed by this author. Delivery gate remains default false; fresh main-agent source review is pending.
+- External: no live registration/reset email or Google/GitHub completion was performed by this author. Delivery gate remains false. The main agent has now completed source review and deployed this update; external mail/provider checks remain pending.
 
-<div dir="rtl" align="right">نجحت فحوص المصدر و15 اختبارًا وفحوص النماذج وPKCE عبر الشبكة التجريبية وعزل الحسابات والشراء. عولجت ملاحظة تبديل الحساب بين التحقق والطلب بربط تعديل كلمة المرور بجلسة الاستعادة الثابتة. لم ينفذ هذا الوكيل بريدًا فعليًا أو OAuth فعليًا أو نشر هذا التحديث؛ المراجعة الجديدة لدى الوكيل الرئيسي.</div>
+<div dir="rtl" align="right">نجحت فحوص المصدر و15 اختبارًا وفحوص النماذج وPKCE عبر الشبكة التجريبية وعزل الحسابات والشراء. عولجت ملاحظة تبديل الحساب بربط تعديل كلمة المرور بجلسة الاستعادة الثابتة. لم ينفذ هذا الوكيل بريدًا فعليًا أو OAuth فعليًا؛ أكمل الوكيل الرئيسي المراجعة ونشر التحديث، وتبقى الاختبارات الخارجية معلقة.</div>
 
 ## Author verification — 2026-10-21 / تحقق المنفذ
 

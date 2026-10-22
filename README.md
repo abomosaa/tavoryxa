@@ -2,25 +2,37 @@
 
 [![Validate demo](https://github.com/abomosaa/tavoryxa/actions/workflows/ci.yml/badge.svg)](https://github.com/abomosaa/tavoryxa/actions/workflows/ci.yml)
 
+**Current release — 2026-10-22:** authentication update deployed from [commit 5bfbfb1](https://github.com/abomosaa/tavoryxa/commit/5bfbfb1), Cloudflare version `5f9b5286-19b1-4c58-8482-6afe12e03efb`; [CI run 39772228693 passed](https://github.com/abomosaa/tavoryxa/actions/runs/39772228693). The main agent completed source review, including the immutable recovery Bearer and 15-second request timeout. Live email delivery and OAuth have **not** been verified: the email-delivery gate remains false and Google/GitHub remain disabled.
+
+<div dir="rtl" align="right">
+
+**الإصدار الحالي:** نُشر تحديث الحسابات من `5bfbfb1` بالإصدار السحابي `5f9b5286-19b1-4c58-8482-6afe12e03efb`، ونجح CI رقم `39772228693`. اكتملت مراجعة المصدر، بما فيها ربط طلب تغيير كلمة المرور بجلسة الاستعادة الثابتة ومهلة 15 ثانية. لم يُتحقق من البريد أو OAuth فعليًا؛ بوابة البريد معطلة وGoogle وGitHub غير مفعلين.
+
+اختير Brevo بحد 300 رسالة يوميًا. التحقق من المرسل وإدخال SMTP login وSMTP key مباشرة في Supabase لدى المستخدم ما زالا معلقين؛ لا تُوضع هذه البيانات في المصدر أو متغيرات الواجهة.
+
+</div>
+
+Brevo is selected with a 300-email daily allowance. Sender verification and direct user entry of the SMTP login/SMTP key into Supabase are pending. No SMTP credentials belong in source files or frontend environment variables.
+
 <div dir="rtl" align="right">
 
 متجر عرض عربي وإنجليزي لثمانية منتجات مكتبية خيالية. يتضمن تصفح الفئات والبحث والترتيب وتفاصيل المنتج وسلة محفوظة والكمية والحذف وطلبًا تجريبيًا وسجل طلبات. الرسومات SVG محلية أصلية؛ لا بيع أو دفع أو شحن حقيقي، ولا تُجمع بيانات بطاقة أو عنوان.
 
-**الحالة المتحققة:** نُشر المتجر على Cloudflare واستجاب الرابط العام بنجاح. نجح البناء وTypeScript والاختبارات التسعة وفحص المتصفح لمسار الطلب وحفظه وإعادة التحميل وتبديل اللغة والتجاوب عند 390 و820 و1440 بكسل. لم يظهر تجاوز أفقي أو أخطاء صفحة. طُبق SQL واختُبر عزل المستخدمين والأسعار. تفعيل دخول GitHub للزوار لم يكتمل بعد.
+**الخط الأساسي الأصلي:** نُشر المتجر على Cloudflare واستجاب الرابط العام بنجاح. نجح البناء وTypeScript والاختبارات التسعة وفحص المتصفح لمسار الطلب وحفظه وإعادة التحميل وتبديل اللغة والتجاوب عند 390 و820 و1440 بكسل. لم يظهر تجاوز أفقي أو أخطاء صفحة. طُبق SQL واختُبر عزل المستخدمين والأسعار. تفعيل دخول GitHub للزوار لم يكتمل بعد.
 
-وضع الضيف يعمل دون إعداد: تحفظ السلة والطلبات في هذا المتصفح فقط. لا تُنقل الطلبات المحلية تلقائيًا إلى الحساب. تفعيل الدخول عبر GitHub يحتاج إعداد مقدم الخدمة والسماح بعنوان العودة ثم متغير البيئة الموضح أدناه. فشل الطلب السحابي يظهر خطأ ولا يحفظ نجاحًا محليًا بديلًا.
+وضع الضيف يعمل دون إعداد: تحفظ السلة والطلبات في هذا المتصفح فقط. لا تُنقل الطلبات المحلية تلقائيًا إلى الحساب. الدخول عبر المزودين يحتاج إعدادهم والسماح بعنوان العودة؛ تُقرأ حالتهم الفعلية وقت التشغيل. فشل الطلب السحابي يظهر خطأ ولا يحفظ نجاحًا محليًا بديلًا.
 
 </div>
 
 A complete Arabic-first / English storefront demo with eight fictional desk objects, original local SVG artwork, category/search/sort, product detail, persistent bag, quantity/removal, simulated checkout, confirmation and order history. No real sales, card/address collection, charges or fulfillment.
 
-Published on Cloudflare with a successful public HTTP response. Build, TypeScript, nine cart/checkout/storage tests, browser checkout + persistence + bilingual/mobile navigation passed; no page errors or horizontal overflow at 390/820/1440px. Live SQL isolation/trusted-price assertions passed. Visitor GitHub provider setup remains pending.
+Original baseline: published on Cloudflare with a successful public HTTP response. Build, TypeScript, nine cart/checkout/storage tests, browser checkout + persistence + bilingual/mobile navigation passed; no page errors or horizontal overflow at 390/820/1440px. Live SQL isolation/trusted-price assertions passed. Visitor GitHub provider setup remains pending.
 
 [Live demo / العرض المباشر](https://tavoryxa.qirvexa.workers.dev) · [Source / المصدر](https://github.com/abomosaa/tavoryxa)
 
-**Authentication source update (2026-10-22):** email/password sign-in, confirmation-gated signup, forgot/reset password, and runtime Google/GitHub visibility are implemented and locally verified. This update still requires the main agent's fresh review/redeployment and external provider/mail delivery checks. No mail or OAuth configuration was changed by this implementation.
+**Authentication coverage:** email/password sign-in, confirmation-gated signup, forgot/reset password, and runtime Google/GitHub visibility are implemented, locally verified and included in the current release. Real email delivery and OAuth completion remain external checks; deployment alone does not verify them.
 
-**تحديث مصدر الحسابات:** أُضيفت نماذج البريد وكلمة المرور والاستعادة وإظهار Google وGitHub حسب الإعداد الفعلي. اختُبرت محليًا؛ اعتماد التحديث ونشره والتحقق الفعلي من المزود والبريد لدى الوكيل الرئيسي. لم يغيّر هذا التنفيذ إعدادات السحابة أو تأكيد البريد.
+**تغطية الحسابات:** نماذج البريد وكلمة المرور والاستعادة وإظهار المزودين حسب الإعداد الفعلي ضمن الإصدار المنشور، بعد الاختبارات المحلية والمراجعة. يبقى التحقق من وصول البريد وإكمال OAuth فعليًا معلقًا؛ النشر وحده لا يثبتهما.
 
 ![Arabic storefront / واجهة المتجر العربية](qa/screenshots/capture/shots/desktop-fold.png)
 

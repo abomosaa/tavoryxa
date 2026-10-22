@@ -1,5 +1,13 @@
 # Change log / سجل التغييرات
 
+## 2026-10-22 — Auth release and selected mail provider / إصدار الحسابات ومزود البريد المختار
+
+- Main-agent source review is complete, including fixed-owner recovery Bearer and the 15-second timeout. Auth update deployed from `5bfbfb1` as Cloudflare version `5f9b5286-19b1-4c58-8482-6afe12e03efb`; CI run `39772228693` succeeded.
+- Live email and OAuth remain unverified. Email-delivery gate is false and Google/GitHub flags are false. Deployment does not imply external mail/provider acceptance.
+- User chose Brevo (300 emails/day). Sender verification and direct user entry of SMTP login/SMTP key into Supabase remain pending; no SMTP secrets were added to the project. Historical implementation/local-test baseline below is preserved.
+
+<div dir="rtl" align="right">اكتملت المراجعة ونُشر تحديث الحسابات من `5bfbfb1` بالإصدار السحابي المذكور ونجح CI. لم يُختبر البريد أو OAuth فعليًا، وتبقى بوابة البريد والمزودان معطلين. اختير Brevo بحد 300 رسالة يوميًا؛ تحقق المرسل وإدخال بيانات SMTP مباشرة في Supabase معلقان. لم تُضف أسرار للمشروع، وحُفظ سجل التنفيذ الأصلي أدناه.</div>
+
 ## 2026-10-22 — Account forms / نماذج الحساب
 
 - Added standalone `AuthPanel.tsx`, public settings/config helpers and Arabic/English email sign-in, matching-password signup, forgot-password and recovery forms, preserving the storefront and guest checkout.
