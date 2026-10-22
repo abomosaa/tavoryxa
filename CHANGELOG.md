@@ -1,5 +1,15 @@
 # Change log / سجل التغييرات
 
+## 2026-10-22 — Account forms / نماذج الحساب
+
+- Added standalone `AuthPanel.tsx`, public settings/config helpers and Arabic/English email sign-in, matching-password signup, forgot-password and recovery forms, preserving the storefront and guest checkout.
+- Provider buttons fail closed against runtime public Auth settings; email delivery flag defaults false and gates signup/reset while enabled email sign-in remains usable. No cloud/provider/confirmation/environment settings changed.
+- Updated Supabase JS to exact 2.118.0 for correct PKCE recovery event propagation; captured that event before React mounts. URL markers and ordinary sessions do not authorize password update.
+- Bound recovery password PUT to an immutable event owner/token and checked the grant before dispatch; mutable singleton session switches cannot redirect the write to a different account. No passwords or additional recovery credentials are persisted or logged; UI errors are safe localized summaries.
+- Fifteen unit tests and browser form, actual-SDK PKCE/network-fixture, account-isolation and guest-shopping packets passed. Auth screenshots inspected. Fresh main-agent review and real provider/mail checks remain external.
+
+<div dir="rtl" align="right">أُضيفت نماذج الحساب العربية والإنجليزية مع إظهار المزودين من الإعداد العام الفعلي، وإبقاء التسجيل والاستعادة بالبريد معطلين حتى التحقق من الإرسال. تعتمد الاستعادة على حدث موثوق وتربط تعديل كلمة المرور بمالك جلسة الاستعادة، دون حفظ كلمة المرور أو عرض أخطاء خام. نجحت 15 حالة اختبار وفحوص النماذج وPKCE وعزل الحسابات والشراء ببيانات شبكة تجريبية؛ إعداد البريد والمزود والنشر لدى الوكيل الرئيسي.</div>
+
 ## 2026-10-22 — Tooling security and source formatting / أمان الأدوات وتنسيق المصدر
 
 - Updated only affected development tools: Vite 7.3.7, Vitest 4.1.12 and Wrangler 4.151.3, with exact versions and a refreshed lockfile. No force fixes, overrides or runtime dependency changes.

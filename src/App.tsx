@@ -11,7 +11,6 @@ import {
   Package,
   Check,
   LogIn,
-  LogOut,
   Globe,
   Leaf,
   MoveUpRight,
@@ -26,7 +25,13 @@ import {
   readStorage,
   type CartLine,
 } from './cart';
-import { supabase, githubEnabled } from './supabase';
+import {
+  supabase,
+  getRecoveryUserId,
+  clearRecoverySignal,
+  recoveryCallbackRequested,
+} from './supabase';
+import { AuthPanel } from './AuthPanel';
 import { ProductArt } from './ProductArt';
 import { isOrder, localOrders, type Order } from './orders';
 type Panel = 'cart' | 'checkout' | 'orders' | 'account' | 'confirmation' | null;
@@ -86,9 +91,11 @@ export default function App() {
     [query, setQuery] = useState(''),
     [sort, setSort] = useState('featured');
   const [selected, setSelected] = useState<Product | null>(null),
-    [panel, setPanel] = useState<Panel>(null);
+    [panel, setPanel] = useState<Panel>(recoveryCallbackRequested ? 'account' : null);
   const [user, setUser] = useState<User | null>(null),
     [authLoading, setAuthLoading] = useState(Boolean(supabase));
+  const [recoveryUserId, setRecoveryUserId] = useState<string | null>(() => getRecoveryUserId());
+  const [recoveryNotice, setRecoveryNotice] = useState(recoveryCallbackRequested);
   const [busy, setBusy] = useState(false),
     [error, setError] = useState(''),
     [notice, setNotice] = useState('');
@@ -150,11 +157,17 @@ export default function App() {
       }
       setUser(next);
       setAuthLoading(false);
+      const recoveryId = getRecoveryUserId();
+      setRecoveryUserId(next?.id === recoveryId ? recoveryId : null);
+      if (next && next.id === recoveryId) setPanel('account');
     }
     client.auth
       .getUser()
       .then(({ data }) => {
-        if (active && initialEpoch === authEpoch.current) applyUser(data.user);
+        if (active && initialEpoch === authEpoch.current) {
+          applyUser(data.user);
+          if (recoveryCallbackRequested) setPanel('account');
+        }
       })
       .catch(() => {
         if (active && initialEpoch === authEpoch.current) setAuthLoading(false);
@@ -212,29 +225,6 @@ export default function App() {
     } finally {
       if (isCurrent(epoch, id)) setOrderLoading(false);
     }
-  }
-  async function login() {
-    setBusy(true);
-    setError('');
-    if (!supabase || !githubEnabled) {
-      setError(
-        t(
-          'تسجيل GitHub غير مفعّل في هذا العرض. يمكنك تجربة الطلب محليًا.',
-          'GitHub sign-in is not enabled in this demo. You can still place a local demo order.',
-        ),
-      );
-      setBusy(false);
-      return;
-    }
-    const { error: e } = await supabase.auth.signInWithOAuth({
-      provider: 'github',
-      options: { redirectTo: window.location.origin },
-    });
-    if (e)
-      setError(
-        t('تعذر تسجيل الدخول. أعد المحاولة لاحقًا.', 'Sign-in failed. Please try again later.'),
-      );
-    setBusy(false);
   }
   async function checkout(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -838,58 +828,21 @@ export default function App() {
               </p>
               {authLoading ? (
                 <p role="status">{t('جارٍ التحقق من الحساب…', 'Checking account…')}</p>
-              ) : user ? (
-                <>
-                  <p className="signed-in">
-                    <Check size={18} />
-                    {user.email || t('حساب متصل', 'Account connected')}
-                  </p>
-                  <button
-                    className="secondary full"
-                    disabled={busy}
-                    onClick={async () => {
-                      setBusy(true);
-                      const { error: e } = await supabase!.auth.signOut();
-                      if (e)
-                        setError(
-                          t(
-                            'تعذر تسجيل الخروج. أعد المحاولة.',
-                            'Could not sign out. Please retry.',
-                          ),
-                        );
-                      else {
-                        setUser(null);
-                        setNotice(t('تم تسجيل الخروج', 'Signed out'));
-                      }
-                      setBusy(false);
-                    }}
-                  >
-                    <LogOut size={18} />
-                    {t('تسجيل الخروج', 'Sign out')}
-                  </button>
-                </>
               ) : (
-                <>
-                  <button
-                    className="primary full"
-                    disabled={busy || !githubEnabled}
-                    onClick={() => void login()}
-                  >
-                    <LogIn size={18} />
-                    {t('المتابعة باستخدام GitHub', 'Continue with GitHub')}
-                  </button>
-                  {!githubEnabled && (
-                    <p className="mode-note">
-                      {t(
-                        'الدخول السحابي غير مفعّل حاليًا. تجربة الضيف تعمل محليًا بالكامل.',
-                        'Cloud sign-in is not enabled yet. The complete guest experience works locally.',
-                      )}
-                    </p>
-                  )}
-                  <button className="secondary full" onClick={() => setPanel(null)}>
-                    {t('أكمل كضيف', 'Continue as a guest')}
-                  </button>
-                </>
+                <AuthPanel
+                  key={user?.id ?? 'guest'}
+                  lang={lang}
+                  user={user}
+                  recoveryUserId={recoveryUserId}
+                  recoveryRequested={recoveryNotice}
+                  onGuest={() => setPanel(null)}
+                  onRecoveryComplete={() => {
+                    clearRecoverySignal();
+                    setRecoveryUserId(null);
+                    setRecoveryNotice(false);
+                    setNotice(t('حُفظت كلمة المرور الجديدة.', 'Your new password is saved.'));
+                  }}
+                />
               )}
               {error && (
                 <p className="error" role="alert">

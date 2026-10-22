@@ -18,6 +18,10 @@ Published on Cloudflare with a successful public HTTP response. Build, TypeScrip
 
 [Live demo / العرض المباشر](https://tavoryxa.qirvexa.workers.dev) · [Source / المصدر](https://github.com/abomosaa/tavoryxa)
 
+**Authentication source update (2026-10-22):** email/password sign-in, confirmation-gated signup, forgot/reset password, and runtime Google/GitHub visibility are implemented and locally verified. This update still requires the main agent's fresh review/redeployment and external provider/mail delivery checks. No mail or OAuth configuration was changed by this implementation.
+
+**تحديث مصدر الحسابات:** أُضيفت نماذج البريد وكلمة المرور والاستعادة وإظهار Google وGitHub حسب الإعداد الفعلي. اختُبرت محليًا؛ اعتماد التحديث ونشره والتحقق الفعلي من المزود والبريد لدى الوكيل الرئيسي. لم يغيّر هذا التنفيذ إعدادات السحابة أو تأكيد البريد.
+
 ![Arabic storefront / واجهة المتجر العربية](qa/screenshots/capture/shots/desktop-fold.png)
 
 ## Run / التشغيل
@@ -39,11 +43,11 @@ Node 22.12+ or Node 24 recommended. Copy `.env.example` to `.env.local` for clou
 
 تُنسخ `.env.example` إلى `.env.local` عند تفعيل السحابة. متغيرات Vite عامة للمتصفح؛ لا توضع فيها مفاتيح سرية.
 
-| Variable                        | Meaning / المعنى                                                                          |
-| ------------------------------- | ----------------------------------------------------------------------------------------- |
-| `VITE_SUPABASE_URL`             | New approved shared project URL / عنوان المشروع الجديد المعتمد                            |
-| `VITE_SUPABASE_PUBLISHABLE_KEY` | Public browser key only / المفتاح العام فقط                                               |
-| `VITE_GITHUB_AUTH_ENABLED`      | `true` only after provider/redirect configuration / يُفعّل بعد إعداد المزود وعنوان العودة |
+| Variable                        | Meaning / المعنى                                                                                                                                          |
+| ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `VITE_SUPABASE_URL`             | New approved shared project URL / عنوان المشروع الجديد المعتمد                                                                                            |
+| `VITE_SUPABASE_PUBLISHABLE_KEY` | Public browser key only / المفتاح العام فقط                                                                                                               |
+| `VITE_EMAIL_DELIVERY_ENABLED`   | Defaults to `false`; enable only after real confirmation/reset mail delivery is verified / يبقى معطلًا حتى التحقق الفعلي من وصول رسائل التأكيد والاستعادة |
 
 ## Cloud contract / ربط السحابة
 
@@ -51,7 +55,11 @@ Node 22.12+ or Node 24 recommended. Copy `.env.example` to `.env.local` for clou
 - Public catalogue: `tavoryxa_products` is read-only for visitors/users. Prices are integer halalas.
 - Orders: authenticated owner-only SELECT, no direct public INSERT/UPDATE/DELETE. Public invoker RPC calls a private-schema definer writer with fixed empty search path and explicit `auth.uid()` check.
 - `tavoryxa_create_order(p_items, p_name, p_request_id)` accepts only product IDs/quantities and a display name/request UUID. The database derives canonical prices/delivery/total, atomically creates order and lines (JSON), and returns an idempotent record for retries. No caller-supplied user ID/status/price accepted.
-- GitHub OAuth redirects to `window.location.origin`. Allow the actual deployment/local origin in Supabase redirect URLs and configure GitHub callback to Supabase's provider callback.
+- Email sign-in uses the existing Supabase client. Google/GitHub buttons appear only when `GET /auth/v1/settings` confirms their exact `external` flag is `true`; failures default to unavailable. No provider secrets enter the browser. The former `VITE_GITHUB_AUTH_ENABLED` switch is no longer used.
+- New email registration/reset requests require both the public email-provider flag and `VITE_EMAIL_DELIVERY_ENABLED=true`; signup also honors `disable_signup`. Ordinary email/password sign-in remains usable when the email provider is enabled. Email confirmation is not disabled or bypassed.
+- OAuth/signup callbacks target the current origin's `/`; reset requests target the current origin's `/?auth=recovery`. Root must allow the actual deployed and local callback URLs and configure provider callbacks in the external consoles.
+- The singleton client uses PKCE. A module-level listener captures only a genuine SDK `PASSWORD_RECOVERY` event before React mounts; a URL marker or ordinary session never grants access to password update. Reset links must be opened in the browser that initiated the request.
+- Password mutation is deliberately bound to the recovery event's immutable owner/access token with `PUT /auth/v1/user`, public `apikey`, and that captured Bearer. A pre-dispatch current-grant check stops known stale requests; a later cross-tab singleton-session change cannot change the request's owner. The grant is held only in memory and cleared after success/sign-out/ordinary sign-in. Do not replace this with a mutable-session `auth.updateUser()` call without equivalent owner binding.
 - There is no custom Worker API. The client uses Supabase REST/RPC and Auth. `wrangler.jsonc` serves `dist` assets with SPA fallback. Main agent owns deployment/resource authorization.
 
 <div dir="rtl" align="right">
@@ -66,7 +74,9 @@ Node 22.12+ or Node 24 recommended. Copy `.env.example` to `.env.local` for clou
 - `qa/flow/`: English desktop, Arabic checkout, mobile order screenshots.
 - `qa/screenshots/capture/shots/`: initial AR 1440/820/390 screenshots.
 - `qa/audit/`: Webforge audit after contrast/touch fixes: 98 overall, no high accessibility issues, no responsive findings. It heuristically missed the existing Arabic skip link. Remaining low/medium findings include tiny decorative labels, no public canonical/social metadata and font-count advice. This is a tool audit, not Lighthouse certification.
-- Impeccable mechanical detector on UI sources returned `[]`. Product record schema advisory was not auto-repaired; product/design intent is documented here and in `PRODUCT.md` / `DESIGN.md`.
+- `qa/auth-forms.cjs`: isolated AR/EN form regression, validation/no request on mismatch, safe errors, signup/reset/OAuth arguments, delivery gate, settings failure, forged recovery marker rejection, early recovery and update. `qa/auth-pkce.cjs`: actual installed SDK with every Auth request intercepted, generated verifier, callback exchange, early recovery event, fixed-owner password update and URL cleanup. These fixtures do not prove live mail or OAuth delivery.
+- Current unit suite: 15 passing tests, including settings fail-closed, password matching and fixed-owner recovery mutation guards. `qa/auth/` contains inspected mobile auth screenshots.
+- The current Impeccable detector reports design-system palette/type-ramp advisories against the incomplete/stale sidecar. Product record schema and sidecar advisories were reported without automatic repair; `DESIGN.md` remains visual authority. The earlier empty detector result predates that schema.
 
 الدليل البصري وتقارير المتصفح محفوظة داخل `qa`. نتائج الأدوات لا تمثل اختبارًا يدويًا لكل تقنية مساعدة، ولا تثبت عمل OAuth أو النشر قبل اختباره فعليًا.
 
@@ -77,3 +87,5 @@ Replace names/artwork/catalogue, update SQL seeded catalogue consistently, then 
 يمكن إعادة تخصيص الاسم والمنتجات والرسومات، مع تحديث كتالوج قاعدة البيانات بما يطابق الأسعار المعروضة. مفاتيح التخزين معزولة باسم المشروع. لا تُستخدم ادعاءات متجر فعلي قبل تنفيذ متطلباته.
 
 Auth isolation regression: `qa/auth-isolation.cjs` substitutes a browser-only Supabase module and verifies stale getUser/order/checkout responses and corrupt local history. It makes no live backend calls. مراجعة عزل الحساب تستخدم بديلًا محليًا داخل المتصفح دون اتصالات سحابية فعلية.
+
+نماذج الحسابات عربية وإنجليزية، ولا تحفظ كلمات المرور أو تعرض أخطاء الخادم الخام. اختبارات الاستعادة تربط التغيير بمالك الجلسة التي صدرت لها الاستعادة، وتمنع نتيجة حساب قديم من الظهور في حساب آخر. اختبارات المتصفح تستبدل الشبكة ببيانات تجريبية ولا تثبت وصول رسالة أو نجاح تسجيل Google الفعلي.

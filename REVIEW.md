@@ -1,5 +1,16 @@
 # Review and verification / المراجعة والتحقق
 
+## 2026-10-22 — Authentication update / تحديث الحسابات
+
+- Source checks: format/typecheck, 15 unit tests and build; new tests cover strict provider flags, unusable settings, password confirmation, safe error codes, pre-dispatch recovery invalidation and fixed-owner Bearer.
+- Browser fixtures: `qa/auth-forms.cjs` passed AR/EN fields and errors, mismatch without API call, signup/reset/OAuth payloads, delivery gate with ordinary sign-in usable, public-settings failure, forged URL marker rejection, early recovery latch and update.
+- Installed SDK fixture: `qa/auth-pkce.cjs` uses the real pinned Supabase SDK, intercepts all Auth requests, initiates PKCE reset, exchanges the callback, receives recovery before/around React startup, completes the fixed-owner password PUT and cleans the callback URL.
+- Existing shopping and auth-isolation browser packets passed after integration. Screenshots `qa/auth/` were inspected at mobile size.
+- Root's cross-tab recovery review finding was addressed by avoiding mutable singleton `updateUser()` for password mutation. The event owner/token is captured in memory and checked before a fixed-Bearer request.
+- External: no live registration/reset email, Google/GitHub completion or deployment of this update was performed by this author. Delivery gate remains default false; fresh main-agent source review is pending.
+
+<div dir="rtl" align="right">نجحت فحوص المصدر و15 اختبارًا وفحوص النماذج وPKCE عبر الشبكة التجريبية وعزل الحسابات والشراء. عولجت ملاحظة تبديل الحساب بين التحقق والطلب بربط تعديل كلمة المرور بجلسة الاستعادة الثابتة. لم ينفذ هذا الوكيل بريدًا فعليًا أو OAuth فعليًا أو نشر هذا التحديث؛ المراجعة الجديدة لدى الوكيل الرئيسي.</div>
+
 ## Author verification — 2026-10-21 / تحقق المنفذ
 
 | Check / الفحص               | Actual result / النتيجة الفعلية                                                                                                                                                                                                                                                                                                          |

@@ -129,3 +129,9 @@ Category navigation uses a written active label and underline. Product cards com
 - Do keep cart totals and checkout actions easy to scan.
 - Don't add decorative shadows to product cards.
 - Don't imply real payment, shipping, testimonials, or sales from the fictional demo.
+
+## Account forms / نماذج الحساب
+
+Account tasks preserve the paper surface, paprika primary actions and compact native-dialog hierarchy. Tabs use written labels and the existing underline language. Labeled fields are 46px minimum high; input text is 15px and form labels/actions remain 13px. Password recovery uses a small lock icon and a direct title, not an extra decorative panel. A sage success surface uses dark green `#35412f`; loading/error/unavailable states always leave a guest or shopping exit. Credentials and developer configuration details never become product copy.
+
+<div dir="rtl" align="right">تحتفظ نماذج الحساب بخلفية الورق واللون الأحمر الدافئ وأسلوب الحوار القائم. العناوين والحقول والأزرار مترجمة، وتبقى العودة للضيف أو التسوق متاحة. رسائل الخطأ مختصرة ولا تعرض تفاصيل الخادم أو إعداد البريد.</div>

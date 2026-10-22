@@ -1373,3 +1373,70 @@ select {
     animation: none !important;
   }
 }
+.auth-tabs {
+  display: flex;
+  gap: 24px;
+  border-bottom: 1px solid var(--line);
+  margin-top: 24px;
+}
+.auth-tabs button {
+  min-height: 46px;
+  padding: 8px 0;
+  font-size: 13px;
+  color: var(--muted);
+  border-bottom: 2px solid transparent;
+}
+.auth-tabs button.active {
+  border-bottom-color: var(--accent);
+  color: var(--accent);
+  font-weight: 600;
+}
+.auth-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+  color: var(--accent);
+}
+.auth-heading h3,
+.auth-subtitle {
+  font-size: 17px;
+  font-weight: 600;
+}
+.auth-subtitle {
+  margin-top: 22px;
+}
+.auth-form .field {
+  margin-top: 18px;
+  font-size: 13px;
+}
+.auth-form input {
+  font-size: 15px;
+}
+.auth-hint {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.9;
+  margin-block: 10px;
+}
+.auth-forgot {
+  margin-top: 8px;
+  min-height: 44px;
+}
+.auth-providers {
+  margin-block: 22px 8px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+.auth-providers p {
+  font-size: 12px;
+  color: var(--muted);
+}
+.auth-success {
+  background: var(--sage);
+  color: #35412f;
+  padding: 14px;
+  font-size: 13px;
+  line-height: 1.9;
+  margin-block: 18px 8px;
+}

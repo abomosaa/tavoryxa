@@ -7,12 +7,12 @@ const assert = require('node:assert/strict');
     const page = await browser.newPage();
     const errors = [];
     page.on('pageerror', (e) => errors.push(e.message));
-    await page.route('**/src/supabase.ts', (route) =>
+    await page.route('**/src/supabase.ts*', (route) =>
       route.fulfill({
         contentType: 'application/javascript',
         body: `
  const wait=key=>new Promise(resolve=>window[key]=resolve);
- export const githubEnabled=false;
+ export const getRecoveryUserId=()=>null; export const getRecoveryGrant=()=>null; export const clearRecoverySignal=()=>{}; export const recoveryCallbackRequested=false;
  export const supabase={auth:{getUser:()=>wait('__resolveInitial'),onAuthStateChange:cb=>{window.__auth=cb;return{data:{subscription:{unsubscribe(){}}}}},signOut:async()=>({error:null})},from:()=>({select:()=>({order:()=>({limit:()=>wait('__resolveOrders')})})}),rpc:()=>wait('__resolveCheckout')};
  `,
       }),
