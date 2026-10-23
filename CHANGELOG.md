@@ -1,5 +1,15 @@
 # Change log / سجل التغييرات
 
+## 2026-10-23 — Live Google and cloud-order verification / تحقق Google والطلب السحابي
+
+- Main agent completed real Google OAuth with the user's authorized account and verified return to Tavoryxa. The initial callback had fallen back to Qirvexa; saving six exact Supabase redirect URLs (previous four plus both deployed origins with trailing `/`) corrected the return path.
+- Simulated cloud order `#B8290AF4` (one notebook, SAR 83 total) appeared after reload. Signing out restored guest history with local order `#68DA4835` only; the cloud order did not appear there. No charge or shipment occurred.
+- Google remains Testing; no In Production publishing or verified branding is claimed. The [Google identity-only exception](https://support.google.com/cloud/answer/15549945?hl=en) permits basic identity requests without the test-user list or seven-day authorization expiry, provided no additional scopes are requested.
+- Email remains unverified with the delivery gate false; GitHub remains disabled. User deferred Brevo setup. Backend schema, IP and SMTP settings were unchanged during this retest. Historical release/local-test records below are preserved.
+- Proof is retained in the root workspace at `research-artifacts/tavoryxa-google-cloud-order.png`, outside this project's committed screenshots. This update changes documentation only.
+
+<div dir="rtl" align="right">تحقق الوكيل الرئيسي من دخول Google الحقيقي بالحساب المصرح به والعودة إلى المتجر بعد تصحيح قائمة العودة إلى ستة عناوين، تشمل عنوانَي الموقعين مع الشرطة المائلة الأخيرة. بقي الطلب السحابي التجريبي `#B8290AF4` لدفتر واحد بإجمالي 83 ريالًا بعد إعادة التحميل، وبعد الخروج ظهر الطلب المحلي السابق `#68DA4835` فقط دون الطلب السحابي. لا دفع أو شحن. Google ما زال في Testing دون ادعاء توثيق العلامة أو النشر In Production؛ استثناء الهوية الأساسية مشروط بالصلاحيات المحدودة. البريد غير متحقق وبوابته معطلة، وGitHub معطل، وإعداد Brevo مؤجل بطلب المستخدم. لم تتغير إعدادات قاعدة البيانات أو IP أو SMTP أثناء إعادة الاختبار، وحُفظ السجل التاريخي أدناه.</div>
+
 ## 2026-10-22 — Auth release and selected mail provider / إصدار الحسابات ومزود البريد المختار
 
 - Main-agent source review is complete, including fixed-owner recovery Bearer and the 15-second timeout. Auth update deployed from `5bfbfb1` as Cloudflare version `5f9b5286-19b1-4c58-8482-6afe12e03efb`; CI run `39772228693` succeeded.

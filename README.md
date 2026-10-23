@@ -2,17 +2,21 @@
 
 [![Validate demo](https://github.com/abomosaa/tavoryxa/actions/workflows/ci.yml/badge.svg)](https://github.com/abomosaa/tavoryxa/actions/workflows/ci.yml)
 
-**Current release — 2026-10-22:** authentication update deployed from [commit 5bfbfb1](https://github.com/abomosaa/tavoryxa/commit/5bfbfb1), Cloudflare version `5f9b5286-19b1-4c58-8482-6afe12e03efb`; [CI run 39772228693 passed](https://github.com/abomosaa/tavoryxa/actions/runs/39772228693). The main agent completed source review, including the immutable recovery Bearer and 15-second request timeout. Live email delivery and OAuth have **not** been verified: the email-delivery gate remains false and Google/GitHub remain disabled.
+**Current verified status — 2026-10-23:** the main agent completed real Google OAuth with the user's authorized account and returned to this storefront. A **simulated** cloud order `#B8290AF4` (one notebook, SAR 83 total) survived reload and appeared in the signed-in order history. Signing out restored the guest history containing local order `#68DA4835`; the cloud order was absent there. No charge or shipment occurred. Email delivery remains unverified and its gate is false; GitHub remains disabled. The user deferred Brevo setup.
+
+**Deployed source release — 2026-10-22:** authentication update deployed from [commit 5bfbfb1](https://github.com/abomosaa/tavoryxa/commit/5bfbfb1), Cloudflare version `5f9b5286-19b1-4c58-8482-6afe12e03efb`; [CI run 39772228693 passed](https://github.com/abomosaa/tavoryxa/actions/runs/39772228693). The main agent completed source review, including the immutable recovery Bearer and 15-second request timeout. At that release checkpoint, live email/OAuth had not yet been verified and both OAuth providers were disabled.
 
 <div dir="rtl" align="right">
 
-**الإصدار الحالي:** نُشر تحديث الحسابات من `5bfbfb1` بالإصدار السحابي `5f9b5286-19b1-4c58-8482-6afe12e03efb`، ونجح CI رقم `39772228693`. اكتملت مراجعة المصدر، بما فيها ربط طلب تغيير كلمة المرور بجلسة الاستعادة الثابتة ومهلة 15 ثانية. لم يُتحقق من البريد أو OAuth فعليًا؛ بوابة البريد معطلة وGoogle وGitHub غير مفعلين.
+**الحالة المتحققة في 23 أكتوبر 2026:** أكمل الوكيل الرئيسي دخول Google الحقيقي بالحساب الذي اختاره المستخدم وعاد إلى المتجر الصحيح. حُفظ الطلب السحابي **التجريبي** `#B8290AF4` لدفتر واحد بإجمالي 83 ريالًا، وظهر بعد إعادة التحميل. بعد تسجيل الخروج ظهر الطلب المحلي السابق `#68DA4835` فقط في سجل الضيف دون الطلب السحابي. لا دفع أو شحن حقيقي. البريد غير متحقق وبوابته معطلة، وGitHub معطل؛ أجّل المستخدم إعداد Brevo.
 
-اختير Brevo بحد 300 رسالة يوميًا. التحقق من المرسل وإدخال SMTP login وSMTP key مباشرة في Supabase لدى المستخدم ما زالا معلقين؛ لا تُوضع هذه البيانات في المصدر أو متغيرات الواجهة.
+**إصدار المصدر المنشور في 22 أكتوبر:** `5bfbfb1` بالإصدار السحابي `5f9b5286-19b1-4c58-8482-6afe12e03efb` وCI ناجح رقم `39772228693`. اكتملت مراجعة المصدر وجلسة الاستعادة الثابتة ومهلة 15 ثانية. كان اختبار البريد وOAuth الفعلي وإعداد المزودين معلقًا عند تلك النقطة التاريخية.
+
+اختير Brevo بحد 300 رسالة يوميًا ثم أُجّل إعداده بطلب المستخدم. يوجد مرسل موثّق بالفعل؛ ما زال ربط SMTP login وSMTP key مباشرة في Supabase واختبار الإرسال معلقين. لا تُوضع هذه البيانات في المصدر أو متغيرات الواجهة.
 
 </div>
 
-Brevo is selected with a 300-email daily allowance. Sender verification and direct user entry of the SMTP login/SMTP key into Supabase are pending. No SMTP credentials belong in source files or frontend environment variables.
+Brevo was selected with a 300-email daily allowance; setup is deferred by the user. An existing verified sender was observed; direct SMTP login/key configuration and delivery testing remain pending. No SMTP credentials belong in source files or frontend environment variables.
 
 <div dir="rtl" align="right">
 
@@ -30,9 +34,13 @@ Original baseline: published on Cloudflare with a successful public HTTP respons
 
 [Live demo / العرض المباشر](https://tavoryxa.qirvexa.workers.dev) · [Source / المصدر](https://github.com/abomosaa/tavoryxa)
 
-**Authentication coverage:** email/password sign-in, confirmation-gated signup, forgot/reset password, and runtime Google/GitHub visibility are implemented, locally verified and included in the current release. Real email delivery and OAuth completion remain external checks; deployment alone does not verify them.
+**Authentication coverage:** email/password sign-in, confirmation-gated signup, forgot/reset password, and runtime Google/GitHub visibility are implemented and locally verified. Real Google OAuth is now verified for the authorized account; email delivery and GitHub remain external checks. Google is still in **Testing**; this does not claim In Production publishing or verified branding. Google's [basic-identity exception](https://support.google.com/cloud/answer/15549945?hl=en) allows identity-only requests without the test-user list or seven-day authorization expiry; additional scopes fall outside that exception.
 
-**تغطية الحسابات:** نماذج البريد وكلمة المرور والاستعادة وإظهار المزودين حسب الإعداد الفعلي ضمن الإصدار المنشور، بعد الاختبارات المحلية والمراجعة. يبقى التحقق من وصول البريد وإكمال OAuth فعليًا معلقًا؛ النشر وحده لا يثبتهما.
+<div dir="rtl" align="right">
+
+**تغطية الحسابات:** النماذج وإظهار المزودين حسب إعدادهم ضمن الإصدار المنشور بعد الاختبارات المحلية. تحقق دخول Google فعليًا بالحساب المصرح به؛ البريد وGitHub لم يُتحققا. يبقى تطبيق Google في حالة Testing دون ادعاء النشر In Production أو توثيق العلامة. استثناء الهوية الأساسية المرتبط أعلاه يعفي طلبات الهوية فقط من قائمة المختبرين وانتهاء التفويض بعد سبعة أيام؛ لا يشمل الصلاحيات الإضافية.
+
+</div>
 
 ![Arabic storefront / واجهة المتجر العربية](qa/screenshots/capture/shots/desktop-fold.png)
 
@@ -70,6 +78,7 @@ Node 22.12+ or Node 24 recommended. Copy `.env.example` to `.env.local` for clou
 - Email sign-in uses the existing Supabase client. Google/GitHub buttons appear only when `GET /auth/v1/settings` confirms their exact `external` flag is `true`; failures default to unavailable. No provider secrets enter the browser. The former `VITE_GITHUB_AUTH_ENABLED` switch is no longer used.
 - New email registration/reset requests require both the public email-provider flag and `VITE_EMAIL_DELIVERY_ENABLED=true`; signup also honors `disable_signup`. Ordinary email/password sign-in remains usable when the email provider is enabled. Email confirmation is not disabled or bypassed.
 - OAuth/signup callbacks target the current origin's `/`; reset requests target the current origin's `/?auth=recovery`. Root must allow the actual deployed and local callback URLs and configure provider callbacks in the external consoles.
+- On 2026-10-23, the first storefront callback fell back to Qirvexa because the trailing-slash origin was not allowlisted. The main agent saved six exact Supabase redirect URLs (the previous four plus both deployed origins with `/`), then verified return to `https://tavoryxa.qirvexa.workers.dev/`. Backend schema, IP and SMTP settings were unchanged during this retest.
 - The singleton client uses PKCE. A module-level listener captures only a genuine SDK `PASSWORD_RECOVERY` event before React mounts; a URL marker or ordinary session never grants access to password update. Reset links must be opened in the browser that initiated the request.
 - Password mutation is deliberately bound to the recovery event's immutable owner/access token with `PUT /auth/v1/user`, public `apikey`, and that captured Bearer. A pre-dispatch current-grant check stops known stale requests; a later cross-tab singleton-session change cannot change the request's owner. The grant is held only in memory and cleared after success/sign-out/ordinary sign-in. Do not replace this with a mutable-session `auth.updateUser()` call without equivalent owner binding.
 - There is no custom Worker API. The client uses Supabase REST/RPC and Auth. `wrangler.jsonc` serves `dist` assets with SPA fallback. Main agent owns deployment/resource authorization.
@@ -82,6 +91,7 @@ Node 22.12+ or Node 24 recommended. Copy `.env.example` to `.env.local` for clou
 
 ## Evidence / أدلة التحقق
 
+- Main-agent live Google/cloud-order proof (2026-10-23): root-workspace `research-artifacts/tavoryxa-google-cloud-order.png`, intentionally outside this project's committed screenshot packet. The live check covered the correct callback origin, persisted simulated cloud order and guest/cloud history separation after sign-out.
 - `qa/browser-results.json`: actual browser flow results. `qa/browser-check.cjs` can rerun with Playwright installed in the QA environment (or `PLAYWRIGHT_MODULE` set to an existing module path) and installed Edge. Default URL `http://127.0.0.1:5174`; override `BASE_URL`.
 - `qa/flow/`: English desktop, Arabic checkout, mobile order screenshots.
 - `qa/screenshots/capture/shots/`: initial AR 1440/820/390 screenshots.
