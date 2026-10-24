@@ -93,7 +93,7 @@ svg {
 .announcement {
   background: var(--ink);
   color: var(--paper);
-  font-size: 11px;
+  font-size: 12px;
   min-height: 34px;
   padding: 7px 48px;
   display: flex;
@@ -103,7 +103,7 @@ svg {
 }
 .announcement span {
   font-family: 'DM Sans', sans-serif;
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 2px;
 }
 .header {
@@ -124,7 +124,7 @@ svg {
   line-height: 1.2;
 }
 .wordmark span {
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0;
   vertical-align: top;
   position: relative;
@@ -247,7 +247,7 @@ svg {
   display: flex;
   align-items: center;
   gap: 12px;
-  font-size: 11px;
+  font-size: 12px;
   color: var(--muted);
   margin-top: 44px;
 }
@@ -325,7 +325,7 @@ svg {
 .hero-feature small {
   display: block;
   color: var(--muted);
-  font-size: 10px;
+  font-size: 12px;
   margin-top: 4px;
 }
 .hero-feature > span:last-child {
@@ -342,7 +342,7 @@ svg {
   border-block: 1px solid var(--line);
   gap: 22px;
   color: #5c5b50;
-  font-size: 11px;
+  font-size: 12px;
 }
 .values span {
   display: flex;
@@ -391,7 +391,7 @@ h2 {
   flex-wrap: wrap;
 }
 .category-tabs button {
-  font-size: 11px;
+  font-size: 12px;
   padding: 9px 0;
   min-height: 44px;
   color: var(--muted);
@@ -426,7 +426,7 @@ h2 {
   background: none;
   width: 140px;
   color: var(--ink);
-  font-size: 11px;
+  font-size: 12px;
   min-height: 44px;
   outline-offset: 0;
 }
@@ -436,7 +436,7 @@ h2 {
 select {
   border: 0;
   background: transparent;
-  font-size: 11px;
+  font-size: 12px;
   color: var(--muted);
   min-height: 44px;
   width: 115px;
@@ -488,7 +488,7 @@ select {
   justify-content: space-between;
   align-items: center;
   background: #f7f3ebd9;
-  font-size: 10px;
+  font-size: 12px;
   opacity: 0;
   transform: translateY(100%);
   transition:
@@ -517,7 +517,7 @@ select {
   line-height: 1.8;
 }
 .product-info p {
-  font-size: 10px;
+  font-size: 12px;
   color: var(--muted);
   line-height: 1.8;
   margin-top: 4px;
@@ -616,7 +616,7 @@ select {
   margin-top: 5px;
 }
 .footer > button {
-  font-size: 10px;
+  font-size: 12px;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -689,7 +689,7 @@ body:has(dialog[open]) {
   padding-block: 14px;
 }
 .muted {
-  font-size: 11px !important;
+  font-size: 12px !important;
   line-height: 1.9 !important;
   color: var(--muted);
   margin-block: 12px;
@@ -730,7 +730,7 @@ body:has(dialog[open]) {
   font-size: 13px;
 }
 .cart-line-info > span {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--muted);
 }
 .quantity {
@@ -816,7 +816,7 @@ body:has(dialog[open]) {
   width: 100%;
 }
 .mode-note {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--muted);
   line-height: 2;
   margin-block: 16px;
@@ -876,7 +876,7 @@ body:has(dialog[open]) {
 }
 .order-card > div > span,
 .order-card small {
-  font-size: 10px;
+  font-size: 12px;
   color: var(--muted);
 }
 .order-card p {
@@ -917,7 +917,7 @@ body:has(dialog[open]) {
 .toast button {
   color: #e7c6a5;
   border-bottom: 1px solid;
-  font-size: 11px;
+  font-size: 12px;
   min-height: 30px;
 }
 .checkout .summary {
@@ -1086,7 +1086,7 @@ html[lang='en'] .modal h2 {
   .values {
     padding-block: 17px;
     justify-content: center;
-    font-size: 10px;
+    font-size: 12px;
   }
   .values > span:nth-child(2),
   .values > span:nth-child(3) {
@@ -1102,7 +1102,7 @@ html[lang='en'] .modal h2 {
     font-size: 25px;
   }
   .section-heading p {
-    font-size: 11px;
+    font-size: 12px;
   }
   .collection-count {
     display: none;
@@ -1117,7 +1117,7 @@ html[lang='en'] .modal h2 {
     gap: 9px;
   }
   .category-tabs button {
-    font-size: 10px;
+    font-size: 12px;
   }
   .category-tabs button.active:after {
     bottom: 0;
@@ -1155,7 +1155,7 @@ html[lang='en'] .modal h2 {
     min-height: 38px;
   }
   .price {
-    font-size: 11px;
+    font-size: 12px;
     margin-top: 6px;
   }
   .product-index {
@@ -1234,13 +1234,13 @@ html[lang='en'] .modal h2 {
     font-size: 20px;
   }
   .toast {
-    font-size: 10px;
+    font-size: 12px;
     gap: 9px;
     padding: 11px 14px;
     bottom: 18px;
   }
   .toast button {
-    font-size: 10px;
+    font-size: 12px;
   }
   .order-card small {
     font-size: 8px;
@@ -1256,7 +1256,7 @@ html[lang='en'] .modal h2 {
     font-size: 28px;
   }
   html[lang='en'] .category-tabs button {
-    font-size: 10px;
+    font-size: 12px;
   }
   html[lang='en'] .story h2 {
     font-size: 31px;
@@ -1283,7 +1283,7 @@ html[lang='en'] .modal h2 {
   color: #625e50;
 }
 .product-info p {
-  font-size: 11px;
+  font-size: 12px;
 }
 .category-tabs button,
 .search input,
@@ -1299,21 +1299,21 @@ select {
   min-height: 44px;
 }
 .footer small {
-  font-size: 11px;
+  font-size: 12px;
 }
 .language {
   min-width: 44px;
 }
 .product-index,
 .visual-caption {
-  font-size: 10px;
+  font-size: 12px;
 }
 .product-info > button:first-child {
   min-height: 44px;
 }
 @media (max-width: 750px) {
   .product-info p {
-    font-size: 10px;
+    font-size: 12px;
   }
   .hero-copy > p {
     font-size: 14px;
@@ -1322,22 +1322,22 @@ select {
     font-size: 13px;
   }
   .category-tabs button {
-    font-size: 11px;
+    font-size: 12px;
   }
   .price {
     font-size: 12px;
   }
   .footer small {
-    font-size: 10px;
+    font-size: 12px;
   }
   .collection-count {
     display: none;
   }
   .announcement {
-    font-size: 10px;
+    font-size: 12px;
   }
   .hero-feature small {
-    font-size: 11px;
+    font-size: 12px;
   }
   .add-button {
     min-width: 32px;

@@ -1,5 +1,15 @@
 # Review and verification / المراجعة والتحقق
 
+## Public upgrade acceptance — 2026-10-24 / التحقق من التوسعة
+
+The lead reviewed collection/product/order screenshots and source. Confirmed image defects were fixed: the hover arrow stays 16px and the calendar's Latin text has an explicit LTR direction. Nine generated photos plus responsive variants are shipped locally. Gallery uses a clearly labeled detail crop, with honest illustration fallback on failure. Global demo banners were replaced by brand copy; simulated checkout and order status remain explicit.
+
+19 source tests, production build, formatting and the storefront browser packet passed. The latter verifies AR/EN at 390/820/1440, all eight photos, gallery/zoom and focus return, quantity bounds, wishlist reload, order totals/re-add and image failure. The lead added centralized user-authorized shipping estimates and raised remaining small CSS text to a 12px floor, then reran the packet successfully. Estimates do not enable commercial fulfillment; see COMMERCE_SETUP.md.
+
+First public Webforge acceptance scored 99 with no high accessibility findings or responsive overflow. Heuristic low issues were reviewed separately from actual usability. This score is an automated design audit, not a Lighthouse or field-performance measurement.
+
+<div dir="rtl" align="right">أُصلحت الصور واتجاه النص، وأضيفت صفحات المنتجات والمعرض والمفضلة وسجل الطلبات. نجح 19 اختبارًا والبناء وفحوص المتصفح بالعربية والإنجليزية وثلاثة أحجام. أُضيفت بيانات توصيل تقديرية بموافقة المستخدم دون تفعيل بيع أو شحن غير مؤكد. راجع الوكيل الرئيسي النتائج والمصدر، واكتملت الاختبارات المستهدفة بعد تكبير النصوص.</div>
+
 ## Local upgrade verification — 2026-10-23 / تحقق التوسعة المحلية
 
 This section concerns expanded local source, not a new deployment. TypeScript, production build and 19 unit tests passed. Existing shopping, auth-isolation, auth-form and installed-SDK PKCE fixtures passed. New `qa/storefront.cjs` passed with external traffic blocked: eight photos loaded; arrow is 16px; product deep links, detail crop, enlargement/Escape/focus return, bounded quantities, wishlist reload, simulated order detail/re-add, missing route and image-failure fallback work. AR/EN at 390/820/1440px had no horizontal overflow or page errors. Proof: `qa/upgrade/`.
