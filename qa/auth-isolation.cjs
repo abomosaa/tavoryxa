@@ -48,7 +48,7 @@ const assert = require('node:assert/strict');
     }, order);
     await page.waitForTimeout(150);
     assert.equal(await page.locator('dialog').count(), 0);
-    assert.equal(await page.locator('.order-card').count(), 0);
+    assert.equal(await page.locator('.order-record').count(), 0);
     // Invalid persisted order shapes must recover to an empty guest history.
     await page.evaluate(() =>
       localStorage.setItem('tavoryxa.orders', '[{"id":"bad","items":null}]'),

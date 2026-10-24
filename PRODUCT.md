@@ -1,3 +1,7 @@
 # Product truth
 
 Tavoryxa is a bilingual Arabic-first portfolio demo of a stationery store. It sells nothing for real. Users browse 8 fictional products, manage a local cart, create simulated orders, and can optionally authenticate through email/password or configured Google/GitHub providers for owner-isolated Supabase orders. Public email registration/reset remains gated until real mail delivery is verified. Root agent owns all live provisioning and deployment. Only free services are authorized.
+
+2026-10-23 expansion: shareable product pages, generated concept photographs with detail crops/enlargement, bounded quantity choices, device-local wishlist and detailed saved-order disclosures/re-add. Eight product IDs and integer prices remain stable. The user requested real commercial ordering; business identity, inventory, contact, payment and shipping facts remain unresolved. Checkout therefore continues to save simulated orders only, with an explicit notice when placing an order. General browsing uses product language rather than global demo warnings. Do not invent stock, verified reviews, delivery times or payment acceptance.
+
+<div dir="rtl" align="right">يتضمن المصدر الموسّع صفحات منتجات ومعرض صور مولدة وتكبيرًا وخيارات كمية ومفضلة محلية وسجل طلبات مفصّلًا. المعرّفات والأسعار والطلبات القديمة محفوظة. طلب المستخدم بيعًا فعليًا؛ بيانات النشاط والمخزون والتواصل والدفع والشحن ما زالت معلقة، لذلك يبقى الطلب تجريبيًا عند تأكيده حتى تنفيذ المتطلبات الحقيقية. التصفح يستخدم لغة المنتج دون تكرار تنبيهات تقنية عامة.</div>

@@ -2,6 +2,10 @@
 
 [![Validate demo](https://github.com/abomosaa/tavoryxa/actions/workflows/ci.yml/badge.svg)](https://github.com/abomosaa/tavoryxa/actions/workflows/ci.yml)
 
+**Local upgrade — 2026-10-23, not yet deployed:** dedicated product routes, generated-photo gallery/detail crop/enlargement, quantity choices, a device-local wishlist and detailed order history/re-add are implemented. Eight IDs/prices and old orders are preserved; no SQL migration is needed. Commerce facts are pending, so checkout still saves simulated records only. [Upgrade scope](UPGRADE.md) separates this local work from the deployed release below.
+
+<div dir="rtl" align="right">اكتملت توسعة المصدر المحلي بصفحات منتجات ومعرض صور مولدة وتكبير وخيارات كمية ومفضلة لهذا الجهاز وتفاصيل الطلبات وإعادة الإضافة. لم تُنشر التوسعة بعد؛ بقيت المعرّفات والأسعار والطلبات محفوظة دون ترحيل SQL. بيانات التجارة الفعلية معلقة، لذلك يبقى إنشاء الطلب تجريبيًا عند تأكيده. حالة النشر السابقة موثقة أدناه.</div>
+
 **Current verified status — 2026-10-23:** the main agent completed real Google OAuth with the user's authorized account and returned to this storefront. A **simulated** cloud order `#B8290AF4` (one notebook, SAR 83 total) survived reload and appeared in the signed-in order history. Signing out restored the guest history containing local order `#68DA4835`; the cloud order was absent there. No charge or shipment occurred. Email delivery remains unverified and its gate is false; GitHub remains disabled. The user deferred Brevo setup.
 
 **Deployed source release — 2026-10-22:** authentication update deployed from [commit 5bfbfb1](https://github.com/abomosaa/tavoryxa/commit/5bfbfb1), Cloudflare version `5f9b5286-19b1-4c58-8482-6afe12e03efb`; [CI run 39772228693 passed](https://github.com/abomosaa/tavoryxa/actions/runs/39772228693). The main agent completed source review, including the immutable recovery Bearer and 15-second request timeout. At that release checkpoint, live email/OAuth had not yet been verified and both OAuth providers were disabled.
@@ -20,7 +24,7 @@ Brevo was selected with a 300-email daily allowance; setup is deferred by the us
 
 <div dir="rtl" align="right">
 
-متجر عرض عربي وإنجليزي لثمانية منتجات مكتبية خيالية. يتضمن تصفح الفئات والبحث والترتيب وتفاصيل المنتج وسلة محفوظة والكمية والحذف وطلبًا تجريبيًا وسجل طلبات. الرسومات SVG محلية أصلية؛ لا بيع أو دفع أو شحن حقيقي، ولا تُجمع بيانات بطاقة أو عنوان.
+متجر عربي وإنجليزي لثمانية منتجات مكتبية، مع الفئات والبحث والترتيب وصفحات المنتجات والسلة والكمية والطلبات. يستخدم المصدر المحلي صورًا تصورية مولدة، مع الاحتفاظ برسومات SVG الأصلية عند تعذر تحميل الصورة. بيانات البيع الفعلي لم تكتمل؛ الطلب الحالي تجريبي ولا يجمع بيانات بطاقة أو عنوان.
 
 **الخط الأساسي الأصلي:** نُشر المتجر على Cloudflare واستجاب الرابط العام بنجاح. نجح البناء وTypeScript والاختبارات التسعة وفحص المتصفح لمسار الطلب وحفظه وإعادة التحميل وتبديل اللغة والتجاوب عند 390 و820 و1440 بكسل. لم يظهر تجاوز أفقي أو أخطاء صفحة. طُبق SQL واختُبر عزل المستخدمين والأسعار. تفعيل دخول GitHub للزوار لم يكتمل بعد.
 
@@ -28,7 +32,9 @@ Brevo was selected with a 300-email daily allowance; setup is deferred by the us
 
 </div>
 
-A complete Arabic-first / English storefront demo with eight fictional desk objects, original local SVG artwork, category/search/sort, product detail, persistent bag, quantity/removal, simulated checkout, confirmation and order history. No real sales, card/address collection, charges or fulfillment.
+A complete Arabic-first / English storefront with eight fictional desk objects, category/search/sort, persistent bag, simulated checkout and owner-isolated order history. Current local source uses generated concept photographs with original SVG failure fallbacks; the published checkpoint above predates that expansion. No real sales, card/address collection, charges or fulfillment.
+
+Local routes: `#/product/notebook` (and the other seven stable IDs), `#/saved`, `#collection`, `#story`. Product links survive reload/browser history; missing IDs have a recovery page. Wishlist contains product IDs only and stays on this device without account sync. Re-add uses current catalogue prices and caps quantities at 20 without changing saved prices/totals. No alternative colour/size SKUs or stock counts are invented. Responsive photo sources serve 480/960px product images and 768/1536px hero images, with larger gallery/zoom size hints.
 
 Original baseline: published on Cloudflare with a successful public HTTP response. Build, TypeScript, nine cart/checkout/storage tests, browser checkout + persistence + bilingual/mobile navigation passed; no page errors or horizontal overflow at 390/820/1440px. Live SQL isolation/trusted-price assertions passed. Visitor GitHub provider setup remains pending.
 
@@ -97,7 +103,8 @@ Node 22.12+ or Node 24 recommended. Copy `.env.example` to `.env.local` for clou
 - `qa/screenshots/capture/shots/`: initial AR 1440/820/390 screenshots.
 - `qa/audit/`: Webforge audit after contrast/touch fixes: 98 overall, no high accessibility issues, no responsive findings. It heuristically missed the existing Arabic skip link. Remaining low/medium findings include tiny decorative labels, no public canonical/social metadata and font-count advice. This is a tool audit, not Lighthouse certification.
 - `qa/auth-forms.cjs`: isolated AR/EN form regression, validation/no request on mismatch, safe errors, signup/reset/OAuth arguments, delivery gate, settings failure, forged recovery marker rejection, early recovery and update. `qa/auth-pkce.cjs`: actual installed SDK with every Auth request intercepted, generated verifier, callback exchange, early recovery event, fixed-owner password update and URL cleanup. These fixtures do not prove live mail or OAuth delivery.
-- Current unit suite: 15 passing tests, including settings fail-closed, password matching and fixed-owner recovery mutation guards. `qa/auth/` contains inspected mobile auth screenshots.
+- Current unit suite: 19 passing tests, including settings fail-closed, password matching, fixed-owner recovery guards, safe routes/wishlist and historical-price preservation. `qa/auth/` contains inspected mobile auth screenshots.
+- `qa/storefront.cjs` and `qa/upgrade/results.json`: all eight photos, fixed 16px arrow, routes/gallery/crop/zoom/focus, quantity/wishlist, saved-order detail/re-add, missing route and image-failure fallback; AR/EN at 390/820/1440px. This fixture blocks external traffic. `qa/upgrade/` contains the upgrade screenshot packet.
 - The current Impeccable detector reports design-system palette/type-ramp advisories against the incomplete/stale sidecar. Product record schema and sidecar advisories were reported without automatic repair; `DESIGN.md` remains visual authority. The earlier empty detector result predates that schema.
 
 الدليل البصري وتقارير المتصفح محفوظة داخل `qa`. نتائج الأدوات لا تمثل اختبارًا يدويًا لكل تقنية مساعدة، ولا تثبت عمل OAuth أو النشر قبل اختباره فعليًا.

@@ -1,5 +1,15 @@
 # Change log / سجل التغييرات
 
+## 2026-10-23 — Expanded local storefront / توسعة المتجر محليًا
+
+- Added shareable product pages, generated product/hero photography, responsive image sources, truthful full-image/detail-crop gallery and keyboard-accessible enlargement. Fixed the oversized overlay arrow and RTL calendar lettering.
+- Added quantity choices, device-local wishlist, result counts/filter reset, missing-product recovery, route titles/focus handling and useful product-use copy. Kept eight IDs/prices and aligned specifications with generated imagery.
+- Expanded order history with saved line prices/totals, local/cloud source and re-add at current prices. Preserved owner guards, Google/auth/recovery, guest isolation and canonical RPC; no schema/cloud/environment change.
+- Removed global demo banners in favor of product language; material simulated-order notices remain at checkout/history, and generated-image disclosure remains by the gallery. Real commercial acceptance stays pending business/inventory/contact/payment/shipping facts.
+- Build/typecheck, 19 unit tests, existing shopping/auth fixtures and the expanded AR/EN browser packet passed; current proof is in `qa/upgrade/`. This local expansion awaits independent acceptance and deployment; historical deployed evidence below is preserved.
+
+<div dir="rtl" align="right">أُضيفت صفحات منتجات وصور مولدة متجاوبة ومعرض وتكبير وخيارات كمية ومفضلة وسجل طلبات مفصّل، مع إصلاح سهم الصور واتجاه النص. حُفظت المعرّفات والأسعار والطلبات والحسابات دون تعديل السحابة. أُزيل تكرار التنبيهات العامة وبقي توضيح المحاكاة عند الطلب وسجله. البيع الحقيقي معلق ببيانات النشاط؛ التوسعة محلية حتى المراجعة والنشر.</div>
+
 ## 2026-10-23 — Live Google and cloud-order verification / تحقق Google والطلب السحابي
 
 - Main agent completed real Google OAuth with the user's authorized account and verified return to Tavoryxa. The initial callback had fallen back to Qirvexa; saving six exact Supabase redirect URLs (previous four plus both deployed origins with trailing `/`) corrected the return path.

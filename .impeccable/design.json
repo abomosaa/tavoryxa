@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-21T20:20:28.392Z",
+  "generatedAt": "2026-10-23T18:10:53.8116415Z",
   "title": "Design System: Tavoryxa",
   "extensions": {
     "colorMeta": {
@@ -212,22 +212,15 @@
       "description": "Circular count adjacent to the bag control.",
       "html": "<span class=\"ds-count\" aria-label=\"قطعتان في السلة\">2</span>",
       "css": ".ds-count{display:inline-block;background:var(--ink,#292820);color:var(--paper,#f7f3eb);height:20px;min-width:20px;text-align:center;border-radius:50%;font:11px/20px 'DM Sans',sans-serif}@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}"
-    },
-    {
-      "name": "Product Card",
-      "kind": "card",
-      "description": "Illustrated product, compact name, price, and add control.",
-      "html": "<article class=\"ds-product\" dir=\"rtl\"><button class=\"ds-art\" aria-label=\"عرض الدفتر\"><svg viewBox=\"0 0 400 350\" aria-hidden=\"true\" focusable=\"false\"><ellipse cx=\"206\" cy=\"288\" rx=\"116\" ry=\"12\" fill=\"#292820\" opacity=\".08\"/><g transform=\"rotate(-12 200 175)\"><rect x=\"110\" y=\"57\" width=\"179\" height=\"224\" rx=\"5\" fill=\"#e8decb\"/><rect x=\"103\" y=\"48\" width=\"179\" height=\"226\" rx=\"5\" fill=\"#a5442d\"/><path d=\"M119 49v224\" stroke=\"#783220\" stroke-width=\"3\"/><rect x=\"146\" y=\"95\" width=\"95\" height=\"54\" fill=\"#f7f3eb\"/><path d=\"M160 112h67m-67 12h45m-45 10h56\" stroke=\"#a84932\" stroke-width=\"2\"/><path d=\"M259 48v227\" stroke=\"#61331e\" stroke-width=\"5\"/><path d=\"M140 274v24l9-6 9 6v-24\" fill=\"#e1b886\"/></g></svg></button><div class=\"ds-info\"><div><h3>دفتر يومي</h3><p>رسم توضيحي · منتج تجريبي</p></div><button class=\"ds-add\" aria-label=\"إضافة الدفتر\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"M5 12h14M12 5v14\"/></svg></button></div><div class=\"ds-price\">74 ر.س</div></article>",
-      "css": ".ds-product{font-family:'Noto Sans Arabic','DM Sans',sans-serif;color:var(--ink,#292820);max-width:270px}.ds-art{display:block;width:100%;aspect-ratio:1/1.06;background:#eae5da;border:0;padding:0;overflow:hidden;cursor:pointer}.ds-art svg{width:100%;height:100%;transition:transform .28s ease}.ds-art:hover svg{transform:scale(1.05)}.ds-art:focus-visible{outline:2px solid var(--accent,#a5442d);outline-offset:4px}.ds-info{display:flex;align-items:start;justify-content:space-between;gap:5px;margin-top:14px}.ds-info h3{font-size:14px;font-weight:600;line-height:1.8;margin:0}.ds-info p{font-size:11px;color:var(--muted,#69675d);line-height:1.8;margin:4px 0 0}.ds-add{font:18px 'DM Sans',sans-serif;min-width:40px;min-height:44px;background:none;border:1px solid var(--line,#dcd7cb);color:inherit;cursor:pointer;transition:background .18s}.ds-add:hover{background:var(--accent,#a5442d);color:var(--paper,#f7f3eb);border-color:var(--accent,#a5442d)}.ds-add:focus-visible{outline:2px solid var(--accent,#a5442d);outline-offset:4px}.ds-price{font-size:12px;font-weight:600;font-variant-numeric:tabular-nums;margin-top:10px}@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}.ds-add{display:flex;align-items:center;justify-content:center}"
     }
   ],
   "narrative": {
     "northStar": "The Warm Stationery Shelf",
-    "overview": "Warm paper, paprika ink, and pale desk materials frame an editorial browsing experience. Local source-native SVG still lifes establish the product world; familiar controls keep cart and simulated checkout practical. This is an original fictional identity, with shadcn research informing control discipline only.",
+    "overview": "Warm paper, paprika ink and generated concept photography lead the collection and product pages. Preserved SVG artwork is an honest image-failure fallback. Gallery, saved objects, bounded quantities and immutable order details keep shopping tasks clear.",
     "keyCharacteristics": [
       "Warm paper and restrained paprika contrast.",
-      "Illustrated desk objects with generous breathing room.",
-      "Arabic-first typography with an English editorial serif."
+      "Consistent photographic desk materials with generous breathing room.",
+      "Arabic-first UI and English editorial serif."
     ],
     "rules": [
       {
@@ -247,13 +240,14 @@
       }
     ],
     "dos": [
-      "Do preserve Arabic-first RTL and complete English layouts.",
-      "Do present the local SVG objects as illustrations.",
-      "Do keep cart totals and checkout actions easy to scan."
+      "Preserve Arabic RTL and complete English layouts.",
+      "Label generated imagery and fallback honestly.",
+      "Keep media sizing separate from action icons.",
+      "Preserve stored order prices and local/cloud boundaries."
     ],
     "donts": [
-      "Don't add decorative shadows to product cards.",
-      "Don't imply real payment, shipping, testimonials, or sales from the fictional demo."
+      "Do not invent inventory, reviews or fulfillment.",
+      "Do not change old order totals when re-adding."
     ]
   }
 }

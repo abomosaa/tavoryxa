@@ -14,6 +14,7 @@ import {
   Globe,
   Leaf,
   MoveUpRight,
+  Heart,
 } from 'lucide-react';
 import type { User } from '@supabase/supabase-js';
 import { products, byId, type Product, type Lang, type Category } from './catalogue';
@@ -32,8 +33,13 @@ import {
   recoveryCallbackRequested,
 } from './supabase';
 import { AuthPanel } from './AuthPanel';
-import { ProductArt } from './ProductArt';
 import { isOrder, localOrders, type Order } from './orders';
+import { ProductCard } from './ProductCard';
+import { ProductPage } from './ProductPage';
+import { OrderHistory } from './OrderHistory';
+import { HeroMedia, ProductMedia } from './ProductMedia';
+import { parseStoreRoute, savedProducts, repeatOrder, productHref } from './storefront';
+import { commerceEstimate } from './commerce';
 type Panel = 'cart' | 'checkout' | 'orders' | 'account' | 'confirmation' | null;
 function Modal({
   children,
@@ -90,8 +96,11 @@ export default function App() {
   const [category, setCategory] = useState<Category>('all'),
     [query, setQuery] = useState(''),
     [sort, setSort] = useState('featured');
-  const [selected, setSelected] = useState<Product | null>(null),
-    [panel, setPanel] = useState<Panel>(recoveryCallbackRequested ? 'account' : null);
+  const [route, setRoute] = useState(() => parseStoreRoute(window.location.hash));
+  const selected = route.page === 'product' ? byId.get(route.id)! : null;
+  const [savedIds, setSavedIds] = useState(() => savedProducts(readStorage('tavoryxa.saved', [])));
+  const [savedError, setSavedError] = useState(false);
+  const [panel, setPanel] = useState<Panel>(recoveryCallbackRequested ? 'account' : null);
   const [user, setUser] = useState<User | null>(null),
     [authLoading, setAuthLoading] = useState(Boolean(supabase));
   const [recoveryUserId, setRecoveryUserId] = useState<string | null>(() => getRecoveryUserId());
@@ -116,6 +125,39 @@ export default function App() {
     }).format(c / 100);
   const totals = cartTotals(cart),
     count = cart.reduce((s, l) => s + l.quantity, 0);
+  useEffect(() => {
+    const onRoute = () => {
+      const next = parseStoreRoute(window.location.hash);
+      setRoute(next);
+      setPanel(null);
+      if (next.page !== 'home') window.scrollTo({ top: 0 });
+    };
+    window.addEventListener('hashchange', onRoute);
+    return () => window.removeEventListener('hashchange', onRoute);
+  }, []);
+  useEffect(() => {
+    if (route.page === 'home') {
+      const anchor = window.location.hash.slice(1);
+      if (['collection', 'story', 'main-content'].includes(anchor))
+        document.getElementById(anchor)?.scrollIntoView();
+      else if (!anchor) window.scrollTo({ top: 0 });
+    } else document.getElementById('main-content')?.focus({ preventScroll: true });
+  }, [route]);
+  useEffect(() => {
+    document.title = selected
+      ? `${selected.name[lang]} — Tavoryxa`
+      : route.page === 'saved'
+        ? t('المفضلة — Tavoryxa', 'Saved objects — Tavoryxa')
+        : t('Tavoryxa — مساحة ليومك', 'Tavoryxa — Make room for your day');
+  }, [route, lang]);
+  useEffect(() => {
+    try {
+      localStorage.setItem('tavoryxa.saved', JSON.stringify(savedIds));
+      setSavedError(false);
+    } catch {
+      setSavedError(true);
+    }
+  }, [savedIds]);
   useEffect(() => {
     document.documentElement.lang = lang;
     document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
@@ -148,7 +190,6 @@ export default function App() {
         currentUserId.current = next?.id ?? null;
         setOrders([]);
         setOrder(null);
-        setSelected(null);
         setPanel(null);
         setError('');
         setNotice('');
@@ -187,12 +228,37 @@ export default function App() {
     const timeout = setTimeout(() => setNotice(''), 3500);
     return () => clearTimeout(timeout);
   }, [notice]);
-  function add(p: Product) {
-    setCart((c) => updateCart(c, p.id, (c.find((l) => l.id === p.id)?.quantity || 0) + 1));
-    setNotice(t('أُضيف إلى السلة', 'Added to your bag'));
+  function add(p: Product, quantity = 1) {
+    const currentQuantity = cart.find((line) => line.id === p.id)?.quantity || 0;
+    setCart((c) => updateCart(c, p.id, (c.find((l) => l.id === p.id)?.quantity || 0) + quantity));
+    setNotice(
+      currentQuantity + quantity > 20
+        ? t(
+            'الحد الأقصى 20 قطعة لكل منتج؛ راجع كمية السلة.',
+            'The limit is 20 of each object; review your bag quantity.',
+          )
+        : t('أُضيف إلى السلة', 'Added to your bag'),
+    );
+  }
+  function toggleSaved(id: string) {
+    setNotice(
+      savedIds.includes(id)
+        ? t('أُزيلت القطعة من مفضلة هذا الجهاز.', 'Object removed from saved items on this device.')
+        : t('حُفظت القطعة في مفضلة هذا الجهاز.', 'Object saved on this device.'),
+    );
+    setSavedIds((ids) => (ids.includes(id) ? ids.filter((v) => v !== id) : [...ids, id]));
+  }
+  function reAddOrder(previous: Order) {
+    setCart((c) => repeatOrder(c, previous));
+    open('cart');
+    setNotice(
+      t(
+        'أُضيفت القطع بالأسعار الحالية. الطلب السابق محفوظ دون تغيير.',
+        'Objects added at current prices. Your saved order is unchanged.',
+      ),
+    );
   }
   function open(p: Panel) {
-    setSelected(null);
     setError('');
     setPanel(p);
   }
@@ -306,11 +372,11 @@ export default function App() {
         <b>{money(totals.subtotal)}</b>
       </div>
       <div>
-        <span>{t('توصيل تجريبي', 'Demo delivery')}</span>
+        <span>{t('توصيل تقديري', 'Estimated delivery')}</span>
         <b>{totals.delivery ? money(totals.delivery) : t('مجاني', 'Free')}</b>
       </div>
       <div className="summary-total">
-        <span>{t('الإجمالي التجريبي', 'Demo total')}</span>
+        <span>{t('الإجمالي التقديري', 'Estimated total')}</span>
         <b>{money(totals.total)}</b>
       </div>
     </div>
@@ -321,10 +387,7 @@ export default function App() {
         {t('انتقل إلى المحتوى', 'Skip to content')}
       </a>
       <div className="announcement">
-        {t(
-          'متجر تجريبي لمعرض الأعمال · لا بيع أو دفع أو شحن فعلي',
-          'Portfolio demo store · No real sales, payments or fulfillment',
-        )}
+        {t('قطع صغيرة لمساحة تفكير أفضل', 'Small objects. A little more room to think.')}
         <span>TAVORYXA OBJECTS</span>
       </div>
       <header className="header wrap">
@@ -341,6 +404,17 @@ export default function App() {
             <Globe size={16} />
             {lang === 'ar' ? 'EN' : 'عربي'}
           </button>
+          <a
+            className="icon-button saved-nav"
+            href="#/saved"
+            aria-label={t(
+              `المفضلة، ${savedIds.length} قطعة`,
+              `Saved objects, ${savedIds.length} items`,
+            )}
+          >
+            <Heart size={19} />
+            <span>{savedIds.length || ''}</span>
+          </a>
           <button
             className="icon-button account-button"
             onClick={() => open('account')}
@@ -358,188 +432,266 @@ export default function App() {
           </button>
         </div>
       </header>
-      <main id="main-content">
-        <section className="hero wrap">
-          <div className="hero-copy">
-            <h1>
-              {t('مساحة صغيرة.', 'A little space.')}
-              <br />
-              <em>{t('أفكار كبيرة.', 'A lot of possibility.')}</em>
-            </h1>
+      <main id="main-content" tabIndex={-1}>
+        {selected && (
+          <ProductPage
+            key={selected.id}
+            product={selected}
+            lang={lang}
+            saved={savedIds.includes(selected.id)}
+            savedIds={savedIds}
+            onSave={toggleSaved}
+            onAdd={add}
+            money={money}
+            cartQuantity={cart.find((l) => l.id === selected.id)?.quantity || 0}
+          />
+        )}
+        {route.page === 'saved' && (
+          <section className="saved-page wrap">
+            <nav className="breadcrumb">
+              <a href="#collection">{t('العودة إلى المجموعة', 'Back to collection')}</a>
+            </nav>
+            <div className="section-heading">
+              <div>
+                <h1>{t('مساحة لما تحب.', 'Room for your favourites.')}</h1>
+                <p>
+                  {t(
+                    'مفضّلتك محفوظة على هذا الجهاز فقط؛ لا تتصل بحسابك السحابي.',
+                    'Your saved objects stay on this device only; they do not sync to your cloud account.',
+                  )}
+                </p>
+              </div>
+              <span>
+                {savedIds.length} {t('قطع', 'objects')}
+              </span>
+            </div>
+            {savedError && (
+              <p className="error" role="alert">
+                {t(
+                  'تعذر حفظ المفضلة على الجهاز. تبقى اختياراتك متاحة خلال هذه الزيارة.',
+                  'Could not save favourites on this device. Your choices remain available during this visit.',
+                )}
+              </p>
+            )}
+            {savedIds.length ? (
+              <div className="product-grid">
+                {savedIds.map((id) => (
+                  <ProductCard
+                    key={id}
+                    product={byId.get(id)!}
+                    lang={lang}
+                    saved
+                    onSave={toggleSaved}
+                    onAdd={add}
+                    money={money}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className="empty">
+                <Heart size={40} />
+                <h2>{t('احتفظ بالقطع التي تعجبك.', 'Keep the objects you love.')}</h2>
+                <p>
+                  {t(
+                    'اضغط القلب بجانب أي قطعة لتعود إليها هنا.',
+                    'Tap the heart beside an object to find it here later.',
+                  )}
+                </p>
+                <a className="primary" href="#collection">
+                  {t('اكتشف المجموعة', 'Explore the collection')}
+                </a>
+              </div>
+            )}
+          </section>
+        )}
+        {route.page === 'missing' && (
+          <section className="empty wrap missing-page">
+            <Package size={40} />
+            <h1>{t('هذه القطعة غير موجودة.', 'This object could not be found.')}</h1>
             <p>
               {t(
-                'أشياء تختارها بعناية، ليوم تصنعه على مهل. اكتشف قطعًا بسيطة تمنح مكتبك مساحة للتفكير.',
-                'Considered objects for an unhurried day. Discover simple pieces that give your desk a little more room to think.',
+                'قد يكون الرابط غير صحيح. القطع الثمانية ما زالت في المجموعة.',
+                'The link may be incorrect. Find all eight objects in the collection.',
               )}
             </p>
             <a className="primary" href="#collection">
-              {t('اكتشف المجموعة', 'Explore the collection')}
-              {lang === 'ar' ? <ArrowLeft size={19} /> : <ArrowRight size={19} />}
+              {t('العودة إلى المجموعة', 'Back to collection')}
             </a>
-            <div className="hero-foot">
-              <span className="tiny-line" />
-              {t('ورق. ملمس. بداية جديدة.', 'Paper. Texture. A fresh start.')}
-            </div>
-          </div>
-          <div className="hero-visual">
-            <div className="visual-caption">
-              <span>THE DESK EDIT</span>
-              <span>VOL. 01 / 2026</span>
-            </div>
-            <div className="hero-stage">
-              <ProductArt product={products[6]} className="hero-mat" />
-              <ProductArt product={products[0]} className="hero-book" />
-              <ProductArt product={products[4]} className="hero-cup" />
-              <ProductArt product={products[2]} className="hero-pen" />
-            </div>
-            <button className="hero-feature" onClick={() => setSelected(products[0])}>
+          </section>
+        )}
+        {route.page === 'home' && (
+          <>
+            <section className="hero wrap">
+              <div className="hero-copy">
+                <h1>
+                  {t('مساحة صغيرة.', 'A little space.')}
+                  <br />
+                  <em>{t('أفكار كبيرة.', 'A lot of possibility.')}</em>
+                </h1>
+                <p>
+                  {t(
+                    'أشياء تختارها بعناية، ليوم تصنعه على مهل. اكتشف قطعًا بسيطة تمنح مكتبك مساحة للتفكير.',
+                    'Considered objects for an unhurried day. Discover simple pieces that give your desk a little more room to think.',
+                  )}
+                </p>
+                <a className="primary" href="#collection">
+                  {t('اكتشف المجموعة', 'Explore the collection')}
+                  {lang === 'ar' ? <ArrowLeft size={19} /> : <ArrowRight size={19} />}
+                </a>
+                <div className="hero-foot">
+                  <span className="tiny-line" />
+                  {t('ورق. ملمس. بداية جديدة.', 'Paper. Texture. A fresh start.')}
+                </div>
+              </div>
+              <div className="hero-visual">
+                <HeroMedia lang={lang} />
+                <a className="hero-feature" href={productHref(products[0])}>
+                  <span>
+                    {t('دفتر البدايات', 'The daily notebook')}
+                    <small>{t('قطعة تبدأ معها الحكاية', 'Where the good ideas begin')}</small>
+                  </span>
+                  <span>
+                    {money(6500)}
+                    <MoveUpRight size={18} />
+                  </span>
+                </a>
+              </div>
+            </section>
+            <div className="values wrap">
               <span>
-                {t('دفتر البدايات', 'The daily notebook')}
-                <small>{t('قطعة تبدأ معها الحكاية', 'Where the good ideas begin')}</small>
+                <Leaf size={18} />
+                {t('قطع مختارة بعناية', 'A considered collection')}
               </span>
-              <span>
-                {money(6500)}
-                <MoveUpRight size={18} />
-              </span>
-            </button>
-          </div>
-        </section>
-        <div className="values wrap">
-          <span>
-            <Leaf size={18} />
-            {t('قطع مختارة بعناية', 'A considered collection')}
-          </span>
-          <span>{t('تفاصيل تستحق المساحة', 'Details worth making room for')}</span>
-          <span>{t('تصميم بسيط، استخدام يومي', 'Simple design, everyday purpose')}</span>
-        </div>
-        <section id="collection" className="collection wrap">
-          <div className="section-heading">
-            <div>
-              <h2>{t('أشياء ليومك.', 'Objects for your everyday.')}</h2>
-              <p>{t('ثماني قطع، واحتمالات كثيرة.', 'Eight objects. Plenty of possibility.')}</p>
+              <span>{t('تفاصيل تستحق المساحة', 'Details worth making room for')}</span>
+              <span>{t('تصميم بسيط، استخدام يومي', 'Simple design, everyday purpose')}</span>
             </div>
-            <span className="collection-count">
-              {t('المجموعة الأولى', 'THE FIRST COLLECTION')} / 08
-            </span>
-          </div>
-          <div className="catalog-toolbar">
-            <div className="category-tabs" role="group" aria-label={t('الفئات', 'Categories')}>
-              {categories.map(([key, ar, en]) => (
-                <button
-                  className={category === key ? 'active' : ''}
-                  aria-pressed={category === key}
-                  key={key}
-                  onClick={() => setCategory(key)}
-                >
-                  {t(ar, en)}
-                </button>
-              ))}
-            </div>
-            <div className="catalog-controls">
-              <label className="search">
-                <Search size={17} />
-                <input
-                  aria-label={t('ابحث عن قطعة', 'Search objects')}
-                  placeholder={t('ابحث عن قطعة…', 'Find an object…')}
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                />
-              </label>
-              <select
-                aria-label={t('ترتيب المنتجات', 'Sort products')}
-                value={sort}
-                onChange={(e) => setSort(e.target.value)}
-              >
-                <option value="featured">{t('اختياراتنا', 'Our edit')}</option>
-                <option value="low">{t('السعر: الأقل', 'Price: low first')}</option>
-                <option value="high">{t('السعر: الأعلى', 'Price: high first')}</option>
-              </select>
-            </div>
-          </div>
-          {filtered.length ? (
-            <div className="product-grid">
-              {filtered.map((p, i) => (
-                <article className="product" key={p.id}>
-                  <button
-                    className={`product-image tone-${p.category}`}
-                    onClick={() => setSelected(p)}
-                    aria-label={t(`عرض ${p.name.ar}`, `View ${p.name.en}`)}
-                  >
-                    <span className="product-index">
-                      T—{String(products.indexOf(p) + 1).padStart(2, '0')}
-                    </span>
-                    <ProductArt product={p} />
-                    <span className="view-product">
-                      {t('اكتشف القطعة', 'Explore object')}
-                      <ArrowUpRight size={16} />
-                    </span>
-                  </button>
-                  <div className="product-info">
-                    <button onClick={() => setSelected(p)}>
-                      <h3>{p.name[lang]}</h3>
-                      <p>{p.material[lang]}</p>
-                    </button>
+            <section id="collection" className="collection wrap">
+              <div className="section-heading">
+                <div>
+                  <h2>{t('أشياء ليومك.', 'Objects for your everyday.')}</h2>
+                  <p>{t('ثماني قطع، واحتمالات كثيرة.', 'Eight objects. Plenty of possibility.')}</p>
+                </div>
+                <span className="collection-count">
+                  {t('المجموعة الأولى', 'THE FIRST COLLECTION')} / 08
+                </span>
+              </div>
+              <div className="catalog-toolbar">
+                <div className="category-tabs" role="group" aria-label={t('الفئات', 'Categories')}>
+                  {categories.map(([key, ar, en]) => (
                     <button
-                      className="add-button"
-                      onClick={() => add(p)}
-                      aria-label={t(`أضف ${p.name.ar}`, `Add ${p.name.en}`)}
+                      className={category === key ? 'active' : ''}
+                      aria-pressed={category === key}
+                      key={key}
+                      onClick={() => setCategory(key)}
                     >
-                      <Plus size={19} />
+                      {t(ar, en)}
                     </button>
-                  </div>
-                  <p className="price">{money(p.price)}</p>
-                </article>
-              ))}
-            </div>
-          ) : (
-            <div className="empty">
-              <Search size={32} />
-              <h3>{t('لم نجد هذه القطعة', 'No objects found')}</h3>
-              <p>
+                  ))}
+                </div>
+                <div className="catalog-controls">
+                  <label className="search">
+                    <Search size={17} />
+                    <input
+                      aria-label={t('ابحث عن قطعة', 'Search objects')}
+                      placeholder={t('ابحث عن قطعة…', 'Find an object…')}
+                      value={query}
+                      onChange={(e) => setQuery(e.target.value)}
+                    />
+                  </label>
+                  <select
+                    aria-label={t('ترتيب المنتجات', 'Sort products')}
+                    value={sort}
+                    onChange={(e) => setSort(e.target.value)}
+                  >
+                    <option value="featured">{t('اختياراتنا', 'Our edit')}</option>
+                    <option value="low">{t('السعر: الأقل', 'Price: low first')}</option>
+                    <option value="high">{t('السعر: الأعلى', 'Price: high first')}</option>
+                  </select>
+                </div>
+              </div>
+              <p className="catalogue-results" role="status">
                 {t(
-                  'جرّب كلمة أخرى أو استعرض كل القطع.',
-                  'Try a different word or view all objects.',
+                  `${filtered.length} من ${products.length} قطع`,
+                  `${filtered.length} of ${products.length} objects`,
+                )}
+                {(query || category !== 'all') && (
+                  <button
+                    className="text-link"
+                    onClick={() => {
+                      setQuery('');
+                      setCategory('all');
+                    }}
+                  >
+                    {t('مسح المرشحات', 'Clear filters')}
+                    <X size={14} />
+                  </button>
                 )}
               </p>
-              <button
-                className="secondary"
-                onClick={() => {
-                  setQuery('');
-                  setCategory('all');
-                }}
-              >
-                {t('عرض الكل', 'Show all')}
-              </button>
-            </div>
-          )}
-        </section>
-        <section className="story wrap" id="story">
-          <div className="story-art">
-            <ProductArt product={products[7]} />
-            <span>
-              A PLACE FOR
-              <br />
-              WHAT MATTERS.
-            </span>
-          </div>
-          <div>
-            <h2>
-              {t('لأن التفاصيل الصغيرة', 'Because the little things')}
-              <br />
-              <em>{t('تصنع يومًا مختلفًا.', 'make a different day.')}</em>
-            </h2>
-            <p>
-              {t(
-                'لا يحتاج مكتبك إلى المزيد. يحتاج إلى ما يناسبك. جمعنا هذه القطع الخيالية حول فكرة بسيطة: مساحة مرتبة تترك مجالًا للفكرة التالية.',
-                'Your desk does not need more. It needs what works for you. This fictional collection comes from a simple idea: a thoughtful space leaves room for the next good thought.',
+              {filtered.length ? (
+                <div className="product-grid">
+                  {filtered.map((p) => (
+                    <ProductCard
+                      key={p.id}
+                      product={p}
+                      lang={lang}
+                      saved={savedIds.includes(p.id)}
+                      onSave={toggleSaved}
+                      onAdd={add}
+                      money={money}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <div className="empty">
+                  <Search size={32} />
+                  <h3>{t('لم نجد هذه القطعة', 'No objects found')}</h3>
+                  <p>
+                    {t(
+                      'جرّب كلمة أخرى أو استعرض كل القطع.',
+                      'Try a different word or view all objects.',
+                    )}
+                  </p>
+                  <button
+                    className="secondary"
+                    onClick={() => {
+                      setQuery('');
+                      setCategory('all');
+                    }}
+                  >
+                    {t('عرض الكل', 'Show all')}
+                  </button>
+                </div>
               )}
-            </p>
-            <a href="#collection" className="text-link">
-              {t('اختر قطعتك التالية', 'Find your next object')}
-              <ArrowUpRight size={20} />
-            </a>
-          </div>
-        </section>
+            </section>
+            <section className="story wrap" id="story">
+              <div className="story-art">
+                <ProductMedia product={products[7]} lang={lang} />
+                <span>
+                  A PLACE FOR
+                  <br />
+                  WHAT MATTERS.
+                </span>
+              </div>
+              <div>
+                <h2>
+                  {t('لأن التفاصيل الصغيرة', 'Because the little things')}
+                  <br />
+                  <em>{t('تصنع يومًا مختلفًا.', 'make a different day.')}</em>
+                </h2>
+                <p>
+                  {t(
+                    'لا يحتاج مكتبك إلى المزيد. يحتاج إلى ما يناسبك. جمعنا هذه القطع الخيالية حول فكرة بسيطة: مساحة مرتبة تترك مجالًا للفكرة التالية.',
+                    'Your desk does not need more. It needs what works for you. This fictional collection comes from a simple idea: a thoughtful space leaves room for the next good thought.',
+                  )}
+                </p>
+                <a href="#collection" className="text-link">
+                  {t('اختر قطعتك التالية', 'Find your next object')}
+                  <ArrowUpRight size={20} />
+                </a>
+              </div>
+            </section>
+          </>
+        )}
       </main>
       <footer className="wrap footer">
         <a href="#" className="wordmark">
@@ -549,8 +701,8 @@ export default function App() {
           {t('مساحة ليومك.', 'Make room for your day.')}
           <small>
             {t(
-              'عرض تفاعلي · منتجات خيالية · الأسعار بالريال السعودي',
-              'Interactive demo · Fictional products · Prices in SAR',
+              'قطع للمكتب والحياة اليومية · الأسعار بالريال السعودي',
+              'Objects for work and everyday life · Prices in SAR',
             )}
           </small>
         </p>
@@ -565,32 +717,14 @@ export default function App() {
         <div className="toast" role="status">
           <Check size={18} />
           {notice}
-          <button onClick={() => open('cart')}>{t('عرض السلة', 'View bag')}</button>
+          <button
+            className="icon-button"
+            onClick={() => setNotice('')}
+            aria-label={t('إغلاق الإشعار', 'Dismiss notification')}
+          >
+            <X size={17} />
+          </button>
         </div>
-      )}
-      {selected && (
-        <Modal title={selected.name[lang]} onClose={() => setSelected(null)} wide>
-          <div className="detail">
-            <div className="detail-art">
-              <ProductArt product={selected} />
-            </div>
-            <div className="detail-copy">
-              <p className="price big-price">{money(selected.price)}</p>
-              <p>{selected.description[lang]}</p>
-              <p className="material">{selected.material[lang]}</p>
-              <p className="muted">
-                {t(
-                  'رسم توضيحي للمنتج · منتج تجريبي غير متاح للبيع الفعلي',
-                  'Product illustration · Demo object, not available for real purchase',
-                )}
-              </p>
-              <button className="primary" onClick={() => add(selected)}>
-                {t('أضف إلى السلة', 'Add to bag')}
-                <Plus size={19} />
-              </button>
-            </div>
-          </div>
-        </Modal>
       )}
       {panel && (
         <Modal
@@ -606,7 +740,7 @@ export default function App() {
                     : t('مساحتك الخاصة', 'Your own little space')
           }
           onClose={() => !busy && setPanel(null)}
-          wide={panel === 'checkout'}
+          wide={panel === 'checkout' || panel === 'orders'}
         >
           {panel === 'cart' &&
             (cart.length ? (
@@ -617,7 +751,7 @@ export default function App() {
                     return (
                       <div className="cart-line" key={l.id}>
                         <div className="cart-art">
-                          <ProductArt product={p} />
+                          <ProductMedia product={p} lang={lang} />
                         </div>
                         <div className="cart-line-info">
                           <h3>{p.name[lang]}</h3>
@@ -681,6 +815,27 @@ export default function App() {
           {panel === 'checkout' && (
             <form className="checkout" onSubmit={(e) => void checkout(e)}>
               <div>
+                <section
+                  className="delivery-estimate"
+                  aria-label={t('بيانات التوصيل التقديرية', 'Delivery estimates')}
+                >
+                  <h3>{t('تصوّر التوصيل', 'Delivery estimate')}</h3>
+                  <p>
+                    {t('وجهة المثال: ', 'Example destination: ')}
+                    {commerceEstimate.destination[lang]}
+                  </p>
+                  <p>
+                    {t('المدة التقديرية: ', 'Estimated timing: ')}
+                    {commerceEstimate.deliveryDays.min}–{commerceEstimate.deliveryDays.max}{' '}
+                    {t('أيام عمل.', 'working days.')}
+                  </p>
+                  <p>
+                    {t(
+                      'هذه بيانات تقديرية للعرض، وليست موعد شحن مؤكدًا. قبول الطلبات التجارية غير مفعّل.',
+                      'These are illustrative estimates, not a confirmed delivery promise. Commercial order acceptance is not enabled.',
+                    )}
+                  </p>
+                </section>
                 <div className="demo-note">
                   {t(
                     'محاكاة فقط. لا دفع، ولا شحن، ولا حاجة لعنوان أو بيانات بطاقة.',
@@ -779,29 +934,7 @@ export default function App() {
               ) : orderLoading ? (
                 <p role="status">{t('جارٍ تحميل الطلبات…', 'Loading orders…')}</p>
               ) : orders.length ? (
-                orders.map((o) => (
-                  <article key={o.id} className="order-card">
-                    <div>
-                      <strong dir="ltr">#{o.id.slice(0, 8).toUpperCase()}</strong>
-                      <span>
-                        {new Date(o.created_at).toLocaleDateString(
-                          lang === 'ar' ? 'ar-SA' : 'en-GB',
-                          { calendar: 'gregory' },
-                        )}
-                      </span>
-                    </div>
-                    {o.items.map((l) => (
-                      <p key={l.id}>
-                        {byId.get(l.id)?.name[lang] || l.id}
-                        <span>× {l.quantity}</span>
-                      </p>
-                    ))}
-                    <div>
-                      <b>{money(o.total_cents)}</b>
-                      <small>{t('طلب محاكاة · لا شحن', 'Simulated order · No fulfillment')}</small>
-                    </div>
-                  </article>
-                ))
+                <OrderHistory orders={orders} lang={lang} money={money} onRepeat={reAddOrder} />
               ) : (
                 <div className="empty">
                   <Package size={38} />

@@ -461,12 +461,12 @@ select {
 .tone-tools {
   background: #e8dfd0;
 }
-.product-image svg {
+.product-image > .product-media {
   width: 100%;
   height: 100%;
   transition: transform 0.28s ease;
 }
-.product-image:hover svg {
+.product-image:hover > .product-media {
   transform: scale(1.05);
 }
 .product-index {

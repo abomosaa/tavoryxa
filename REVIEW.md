@@ -1,5 +1,13 @@
 # Review and verification / المراجعة والتحقق
 
+## Local upgrade verification — 2026-10-23 / تحقق التوسعة المحلية
+
+This section concerns expanded local source, not a new deployment. TypeScript, production build and 19 unit tests passed. Existing shopping, auth-isolation, auth-form and installed-SDK PKCE fixtures passed. New `qa/storefront.cjs` passed with external traffic blocked: eight photos loaded; arrow is 16px; product deep links, detail crop, enlargement/Escape/focus return, bounded quantities, wishlist reload, simulated order detail/re-add, missing route and image-failure fallback work. AR/EN at 390/820/1440px had no horizontal overflow or page errors. Proof: `qa/upgrade/`.
+
+Eight IDs, prices, old order parsing, saved financial values and canonical RPC are preserved. Wishlist is device-local. Root requested removal of global demo banners, correct hero dimensions/fallback, useful nonduplicated product copy and responsive image sources; these corrections are implemented for final verification. Fresh independent acceptance/deployment are separate. Real commerce remains pending supplied business/inventory/contact/payment/shipping facts; no acceptance or fulfillment is claimed.
+
+<div dir="rtl" align="right">هذه نتائج المصدر الموسّع المحلي وليست نشرًا جديدًا. نجح TypeScript والبناء و19 اختبارًا وفحوص الشراء والحسابات وPKCE السابقة، ومعرض الصور والتكبير وإرجاع التركيز والكمية والمفضلة والطلبات وفشل الصور والروابط. لا تجاوز أفقي أو أخطاء صفحة في العربية والإنجليزية عند ثلاثة أحجام. عولجت ملاحظات المراجع حول التنبيهات العامة والصورة الرئيسية وتكرار الوصف والصور المتجاوبة، وتبقى المراجعة النهائية والنشر منفصلين. البيع الفعلي معلق ببيانات النشاط.</div>
+
 ## Current live verification — 2026-10-23 / التحقق الفعلي الحالي
 
 - Main-agent verification: real Google OAuth succeeded after the user selected the authorized owner account. The retest returned to the correct Tavoryxa origin and showed the cloud connection.

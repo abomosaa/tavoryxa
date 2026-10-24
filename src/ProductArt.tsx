@@ -48,7 +48,15 @@ export function ProductArt({ product, className = '' }: { product: Product; clas
           <path d="m94 272 43-206h154l39 206" fill={c} />
           <rect x="106" y="79" width="188" height="175" rx="2" fill="#fffcf4" />
           <path d="M106 120h188" stroke="#e3dbcb" />
-          <text x="130" y="109" fontSize="15" fill="#a5442d" fontFamily="serif">
+          <text
+            x="130"
+            y="109"
+            fontSize="15"
+            fill="#a5442d"
+            fontFamily="serif"
+            direction="ltr"
+            textAnchor="start"
+          >
             TAKE YOUR TIME
           </text>
           {Array.from({ length: 28 }, (_, i) => (

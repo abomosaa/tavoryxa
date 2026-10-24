@@ -1,4 +1,5 @@
 import { byId } from './catalogue';
+import { commerceEstimate } from './commerce';
 export interface CartLine {
   id: string;
   quantity: number;
@@ -23,7 +24,10 @@ export function updateCart(cart: CartLine[], id: string, quantity: number) {
 }
 export function cartTotals(cart: CartLine[]) {
   const subtotal = normalizeCart(cart).reduce((s, l) => s + byId.get(l.id)!.price * l.quantity, 0);
-  const delivery = subtotal === 0 || subtotal >= 20000 ? 0 : 1800;
+  const delivery =
+    subtotal === 0 || subtotal >= commerceEstimate.freeDeliveryFromCents
+      ? 0
+      : commerceEstimate.deliveryCents;
   return { subtotal, delivery, total: subtotal + delivery };
 }
 export function validateCheckout(cart: CartLine[], name: string) {

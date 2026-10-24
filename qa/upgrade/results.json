@@ -1,0 +1,26 @@
+{
+  "passed": true,
+  "languages": [
+    "ar",
+    "en"
+  ],
+  "widths": [
+    390,
+    820,
+    1440
+  ],
+  "checks": [
+    "all8 photos loaded",
+    "16px arrow",
+    "product deep link",
+    "detail crop",
+    "zoom Escape focus return",
+    "quantity presets",
+    "wishlist persistence",
+    "unknown route",
+    "saved totals and re-add",
+    "honest failed-image fallback"
+  ],
+  "externalNetworkBlocked": true,
+  "pageErrors": []
+}

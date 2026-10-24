@@ -19,7 +19,7 @@ const fs = require('node:fs');
   await page.getByRole('button', { name: 'تأكيد الطلب التجريبي', exact: true }).click();
   await page.getByRole('heading', { name: 'حُفظ طلبك التجريبي', exact: true }).waitFor();
   await page.getByRole('button', { name: 'عرض طلباتي', exact: true }).click();
-  if ((await page.locator('.order-card').count()) !== 1) throw new Error('Order not saved');
+  if ((await page.locator('.order-record').count()) !== 1) throw new Error('Order not saved');
   await page.getByRole('button', { name: 'إغلاق', exact: true }).click();
   await page.reload();
   if ((await page.getByRole('button', { name: 'السلة، 0 قطعة', exact: true }).count()) !== 1)
@@ -38,7 +38,7 @@ const fs = require('node:fs');
   await page.setViewportSize({ width: 390, height: 844 });
   await page.getByRole('button', { name: 'Account', exact: true }).click();
   await page.getByRole('button', { name: 'View my orders', exact: true }).click();
-  if ((await page.locator('.order-card').count()) !== 1)
+  if ((await page.locator('.order-record').count()) !== 1)
     throw new Error('Persistent guest orders unavailable on mobile');
   await page.screenshot({ path: 'qa/flow/mobile-orders-en.png', fullPage: true });
   await page.getByRole('button', { name: 'Close', exact: true }).click();
