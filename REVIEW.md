@@ -2,6 +2,8 @@
 
 ## Public upgrade acceptance — 2026-10-24 / التحقق من التوسعة
 
+Real Google sign-in was reverified through the deployed store. The expanded account history displayed the previous cloud order #B8290AF4, one notebook at SAR65 plus SAR18 delivery, retaining its saved SAR83 total. No new order was submitted. Proof is retained outside the public repository in the root research artifacts.
+
 The lead reviewed collection/product/order screenshots and source. Confirmed image defects were fixed: the hover arrow stays 16px and the calendar's Latin text has an explicit LTR direction. Nine generated photos plus responsive variants are shipped locally. Gallery uses a clearly labeled detail crop, with honest illustration fallback on failure. Global demo banners were replaced by brand copy; simulated checkout and order status remain explicit.
 
 19 source tests, production build, formatting and the storefront browser packet passed. The latter verifies AR/EN at 390/820/1440, all eight photos, gallery/zoom and focus return, quantity bounds, wishlist reload, order totals/re-add and image failure. The lead added centralized user-authorized shipping estimates and raised remaining small CSS text to a 12px floor, then reran the packet successfully. Estimates do not enable commercial fulfillment; see COMMERCE_SETUP.md.
