@@ -154,28 +154,9 @@ export function ProductPage({
                 </dd>
               </div>
             </dl>
-            <fieldset className="quantity-options">
-              <legend>{t('اختَر الكمية', 'Choose your quantity')}</legend>
-              <div>
-                {[1, 2, 3].map((n) => (
-                  <button
-                    type="button"
-                    key={n}
-                    aria-pressed={quantity === n}
-                    className={quantity === n ? 'active' : ''}
-                    onClick={() => setQuantity(n)}
-                  >
-                    <span>
-                      {t(
-                        n === 1 ? 'قطعة واحدة' : n === 2 ? 'قطعتان' : 'ثلاث قطع',
-                        n === 1 ? 'Single' : n === 2 ? 'A pair' : 'Three',
-                      )}
-                    </span>
-                    <b>{money(n * product.price)}</b>
-                  </button>
-                ))}
-              </div>
-            </fieldset>
+            <label className="quantity-label" htmlFor="product-quantity">
+              {t('الكمية', 'Quantity')}
+            </label>
             <div className="product-buy">
               <div className="quantity">
                 <button
@@ -186,6 +167,7 @@ export function ProductPage({
                   <Minus size={16} />
                 </button>
                 <input
+                  id="product-quantity"
                   aria-label={t('الكمية', 'Quantity')}
                   type="number"
                   min="1"

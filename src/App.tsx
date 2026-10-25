@@ -40,6 +40,7 @@ import { OrderHistory } from './OrderHistory';
 import { HeroMedia, ProductMedia } from './ProductMedia';
 import { parseStoreRoute, savedProducts, repeatOrder, productHref } from './storefront';
 import { commerceEstimate } from './commerce';
+import { DeskEdit } from './DeskEdit';
 type Panel = 'cart' | 'checkout' | 'orders' | 'account' | 'confirmation' | null;
 function Modal({
   children,
@@ -239,6 +240,7 @@ export default function App() {
           )
         : t('أُضيف إلى السلة', 'Added to your bag'),
     );
+    return currentQuantity < 20;
   }
   function toggleSaved(id: string) {
     setNotice(
@@ -247,6 +249,27 @@ export default function App() {
         : t('حُفظت القطعة في مفضلة هذا الجهاز.', 'Object saved on this device.'),
     );
     setSavedIds((ids) => (ids.includes(id) ? ids.filter((v) => v !== id) : [...ids, id]));
+  }
+  function addCombination(ids: readonly string[]) {
+    setCart((previous) =>
+      ids.reduce(
+        (next, id) =>
+          updateCart(next, id, (next.find((line) => line.id === id)?.quantity || 0) + 1),
+        previous,
+      ),
+    );
+    const atLimit = ids.some((id) => (cart.find((line) => line.id === id)?.quantity || 0) >= 20);
+    setNotice(
+      atLimit
+        ? t(
+            'أُضيفت القطع المتاحة؛ الحد الأقصى 20 لكل منتج.',
+            'Objects added where possible; the limit is 20 of each.',
+          )
+        : t(
+            'أُضيفت التوليفة إلى سلتك. يمكنك تعديل كل قطعة.',
+            'Combination added. You can adjust each object in your bag.',
+          ),
+    );
   }
   function reAddOrder(previous: Order) {
     setCart((c) => repeatOrder(c, previous));
@@ -428,7 +451,7 @@ export default function App() {
             aria-label={t(`السلة، ${count} قطعة`, `Bag, ${count} items`)}
           >
             <ShoppingBag size={19} />
-            <span>{count}</span>
+            <span key={count}>{count}</span>
           </button>
         </div>
       </header>
@@ -551,7 +574,7 @@ export default function App() {
                     <small>{t('قطعة تبدأ معها الحكاية', 'Where the good ideas begin')}</small>
                   </span>
                   <span>
-                    {money(6500)}
+                    {money(products[0].price)}
                     <MoveUpRight size={18} />
                   </span>
                 </a>
@@ -597,6 +620,16 @@ export default function App() {
                       value={query}
                       onChange={(e) => setQuery(e.target.value)}
                     />
+                    {query && (
+                      <button
+                        type="button"
+                        className="clear-search icon-button"
+                        aria-label={t('مسح البحث', 'Clear search')}
+                        onClick={() => setQuery('')}
+                      >
+                        <X size={16} />
+                      </button>
+                    )}
                   </label>
                   <select
                     aria-label={t('ترتيب المنتجات', 'Sort products')}
@@ -628,7 +661,7 @@ export default function App() {
                 )}
               </p>
               {filtered.length ? (
-                <div className="product-grid">
+                <div className="product-grid" key={`${category}-${sort}`}>
                   {filtered.map((p) => (
                     <ProductCard
                       key={p.id}
@@ -663,6 +696,7 @@ export default function App() {
                 </div>
               )}
             </section>
+            <DeskEdit lang={lang} money={money} onAdd={addCombination} />
             <section className="story wrap" id="story">
               <div className="story-art">
                 <ProductMedia product={products[7]} lang={lang} />
@@ -714,7 +748,7 @@ export default function App() {
         </button>
       </footer>
       {notice && (
-        <div className="toast" role="status">
+        <div className="toast" role="status" key={`${notice}-${count}`}>
           <Check size={18} />
           {notice}
           <button

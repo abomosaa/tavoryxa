@@ -51,7 +51,7 @@ const fs = require('node:fs');
       true,
     );
     await page.getByRole('button', { name: 'صورة المنتج', exact: true }).click();
-    await page.getByRole('button', { name: 'ثلاث قطع', exact: false }).click();
+    await page.getByRole('spinbutton', { name: 'الكمية', exact: true }).fill('3');
     await page.getByRole('button', { name: /أضف إلى السلة/ }).click();
     await page.getByRole('button', { name: 'السلة، 3 قطعة', exact: true }).waitFor();
     await page.getByRole('button', { name: 'حفظ في المفضلة', exact: true }).click();
@@ -89,7 +89,7 @@ const fs = require('node:fs');
     await page.getByRole('button', { name: 'View my orders', exact: true }).click();
     await page.locator('.order-record summary').click();
     assert.equal(await page.locator('.history-line').count(), 1);
-    assert.ok((await page.locator('.history-totals').innerText()).includes('195'));
+    assert.ok((await page.locator('.history-totals').innerText()).includes('87'));
     await page.screenshot({ path: 'qa/upgrade/orders-en-mobile.png', fullPage: true });
     await page.getByRole('button', { name: 'Add objects to bag again', exact: true }).click();
     assert.equal(await page.locator('.quantity span').innerText(), '3');
@@ -124,7 +124,7 @@ const fs = require('node:fs');
             'product deep link',
             'detail crop',
             'zoom Escape focus return',
-            'quantity presets',
+            'numeric quantity',
             'wishlist persistence',
             'unknown route',
             'saved totals and re-add',

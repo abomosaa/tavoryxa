@@ -1,0 +1,202 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "language": "ar",
+      "width": 360,
+      "hash": "",
+      "overflow": false
+    },
+    {
+      "language": "ar",
+      "width": 360,
+      "hash": "#collection",
+      "overflow": false
+    },
+    {
+      "language": "ar",
+      "width": 360,
+      "hash": "#/product/notebook",
+      "overflow": false
+    },
+    {
+      "language": "ar",
+      "width": 360,
+      "hash": "#/saved",
+      "overflow": false
+    },
+    {
+      "language": "ar",
+      "width": 390,
+      "hash": "",
+      "overflow": false
+    },
+    {
+      "language": "ar",
+      "width": 390,
+      "hash": "#collection",
+      "overflow": false
+    },
+    {
+      "language": "ar",
+      "width": 390,
+      "hash": "#/product/notebook",
+      "overflow": false
+    },
+    {
+      "language": "ar",
+      "width": 390,
+      "hash": "#/saved",
+      "overflow": false
+    },
+    {
+      "language": "ar",
+      "width": 820,
+      "hash": "",
+      "overflow": false
+    },
+    {
+      "language": "ar",
+      "width": 820,
+      "hash": "#collection",
+      "overflow": false
+    },
+    {
+      "language": "ar",
+      "width": 820,
+      "hash": "#/product/notebook",
+      "overflow": false
+    },
+    {
+      "language": "ar",
+      "width": 820,
+      "hash": "#/saved",
+      "overflow": false
+    },
+    {
+      "language": "ar",
+      "width": 1440,
+      "hash": "",
+      "overflow": false
+    },
+    {
+      "language": "ar",
+      "width": 1440,
+      "hash": "#collection",
+      "overflow": false
+    },
+    {
+      "language": "ar",
+      "width": 1440,
+      "hash": "#/product/notebook",
+      "overflow": false
+    },
+    {
+      "language": "ar",
+      "width": 1440,
+      "hash": "#/saved",
+      "overflow": false
+    },
+    {
+      "language": "en",
+      "width": 360,
+      "hash": "",
+      "overflow": false
+    },
+    {
+      "language": "en",
+      "width": 360,
+      "hash": "#collection",
+      "overflow": false
+    },
+    {
+      "language": "en",
+      "width": 360,
+      "hash": "#/product/notebook",
+      "overflow": false
+    },
+    {
+      "language": "en",
+      "width": 360,
+      "hash": "#/saved",
+      "overflow": false
+    },
+    {
+      "language": "en",
+      "width": 390,
+      "hash": "",
+      "overflow": false
+    },
+    {
+      "language": "en",
+      "width": 390,
+      "hash": "#collection",
+      "overflow": false
+    },
+    {
+      "language": "en",
+      "width": 390,
+      "hash": "#/product/notebook",
+      "overflow": false
+    },
+    {
+      "language": "en",
+      "width": 390,
+      "hash": "#/saved",
+      "overflow": false
+    },
+    {
+      "language": "en",
+      "width": 820,
+      "hash": "",
+      "overflow": false
+    },
+    {
+      "language": "en",
+      "width": 820,
+      "hash": "#collection",
+      "overflow": false
+    },
+    {
+      "language": "en",
+      "width": 820,
+      "hash": "#/product/notebook",
+      "overflow": false
+    },
+    {
+      "language": "en",
+      "width": 820,
+      "hash": "#/saved",
+      "overflow": false
+    },
+    {
+      "language": "en",
+      "width": 1440,
+      "hash": "",
+      "overflow": false
+    },
+    {
+      "language": "en",
+      "width": 1440,
+      "hash": "#collection",
+      "overflow": false
+    },
+    {
+      "language": "en",
+      "width": 1440,
+      "hash": "#/product/notebook",
+      "overflow": false
+    },
+    {
+      "language": "en",
+      "width": 1440,
+      "hash": "#/saved",
+      "overflow": false
+    }
+  ],
+  "quantity": "no presets, no number box, bounds/total verified",
+  "combinations": "3 objects at canonical prices, keyboard tabs",
+  "motion": "authored keyframes and reduced motion verified",
+  "externalNetworkBlocked": true,
+  "errors": []
+}

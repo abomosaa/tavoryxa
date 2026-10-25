@@ -8,3 +8,4 @@ research/
 qa/screenshots/capture/dom.html
 qa/screenshots/capture/scan.json
 *.tsbuildinfo
+qa/.tmp/

@@ -282,56 +282,25 @@ html[lang='en'] .product-heading h1 {
   border: 1px solid #29282033;
   border-radius: 50%;
 }
-.quantity-options {
-  border: 0;
-  padding: 0;
-  margin: 0;
-}
-.quantity-options legend {
+.quantity-label {
+  display: block;
   font-size: 13px;
-  margin-bottom: 12px;
-}
-.quantity-options > div {
-  display: flex;
-  gap: 9px;
-}
-.quantity-options button {
-  width: 33.333%;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 12px 5px;
-  font-size: 12px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  min-height: 68px;
-}
-.quantity-options button b {
-  font-size: 12px;
-  font-weight: 500;
   color: var(--muted);
-}
-.quantity-options button.active {
-  border-color: var(--accent);
-  background: #efe0d5;
-  color: #843821;
-}
-.quantity-options button.active b {
-  color: #843821;
+  margin-top: 24px;
 }
 .product-buy {
   display: flex;
   align-items: stretch;
   gap: 12px;
-  margin-top: 20px;
+  margin-top: 8px;
 }
 .product-buy .quantity {
   margin: 0;
   align-items: stretch;
   height: 52px;
   gap: 0;
-  background: #fffaf0;
+  background: transparent;
+  border: 0;
 }
 .product-buy .quantity button {
   width: 44px;
@@ -348,6 +317,13 @@ html[lang='en'] .product-heading h1 {
     14px 'DM Sans',
     sans-serif;
   appearance: textfield;
+  outline: none;
+  box-shadow: none;
+  border-radius: 0;
+}
+.product-buy .quantity input:focus-visible {
+  outline: none;
+  box-shadow: inset 0 -2px var(--ink);
 }
 .product-buy .quantity input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -856,12 +832,6 @@ html[lang='en'] .hero h1 {
   }
   .language > svg {
     display: none;
-  }
-  .quantity-options button {
-    font-size: 12px;
-  }
-  .quantity-options button b {
-    font-size: 12px;
   }
   .product-buy .primary {
     padding-inline: 10px;

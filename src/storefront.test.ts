@@ -35,7 +35,7 @@ describe('expanded storefront boundaries', () => {
     const before = JSON.stringify(order);
     const next = repeatOrder([{ id: 'notebook', quantity: 19 }], order);
     expect(next).toEqual([{ id: 'notebook', quantity: 20 }]);
-    expect(cartTotals(next).subtotal).toBe(130000);
+    expect(cartTotals(next).subtotal).toBe(58000);
     expect(JSON.stringify(order)).toBe(before);
     expect(order.total_cents).toBe(11800);
   });

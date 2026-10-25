@@ -142,7 +142,7 @@ Primary buttons have a paprika fill, warm white text, 48px minimum height, a dar
 
 Category navigation uses a written active label and underline. Product cards combine a photographic media link, name, specification, price, separate heart and add actions. Media sizing/scaling applies only to the media wrapper, never descendant action icons. Desktop images scale gently on hover and reveal a detail affordance; mobile keeps direct actions. Native dialogs adapt to available height. Motion uses 180ms control feedback and 280ms image scaling; reduced motion removes transitions and animation.
 
-Gallery controls have written labels and selected borders. The detail view is an explicitly labeled crop of the primary photo. Image enlargement uses a native dialog and returns focus to its invoker. Quantity presets use the selected paper/ink pair above plus a bounded numeric stepper. Order records use native disclosures and immutable saved financial values. New body, specification and gallery text is at least 12px; controls retain visible keyboard focus.
+Gallery controls have written labels and selected borders. The detail view is an explicitly labeled crop of the primary photo. Image enlargement uses a native dialog and returns focus to its invoker. Quantity uses a bounded numeric stepper only, with no preset cards or rectangular number outline; keyboard focus uses a dark underline. Order records use native disclosures and immutable saved financial values. New body, specification and gallery text is at least 12px; controls retain visible keyboard focus.
 
 ## Do's and Don'ts
 
@@ -158,3 +158,11 @@ Gallery controls have written labels and selected borders. The detail view is an
 Account tasks preserve the paper surface, paprika primary actions and compact native-dialog hierarchy. Tabs use written labels and the existing underline language. Labeled fields are 46px minimum high; input text is 15px and form labels/actions remain 13px. Password recovery uses a small lock icon and a direct title, not an extra decorative panel. A sage success surface uses dark green `#35412f`; loading/error/unavailable states always leave a guest or shopping exit. Credentials and developer configuration details never become product copy.
 
 <div dir="rtl" align="right">تحتفظ نماذج الحساب بخلفية الورق واللون الأحمر الدافئ وأسلوب الحوار القائم. العناوين والحقول والأزرار مترجمة، وتبقى العودة للضيف أو التسوق متاحة. رسائل الخطأ مختصرة ولا تعرض تفاصيل الخادم أو إعداد البريد.</div>
+
+## 25 October refinement / تطوير25أكتوبر
+
+The shelf-opening photo sequence uses clip-path/scale for720ms; the second headline line reveals for620ms. Gallery changes last300ms, add/save/count feedback160–280ms and dialogs/toasts180–260ms. No perpetual loops or scroll-dependent hidden content. Reduced motion removes spatial animation and retains visible written/cart/color feedback. Mobile exposes the main navigation and compact gallery thumbnails (80×60px). Desktop header88px and compact collection toolbar remain sticky. Product photos stay the focal material; the new desk-edit section shows three real catalogue SKUs with derived totals, keyboard tabs and one normal bag action.
+
+Intentional refinement type sizes: operational12/13/14/15px, catalogue price17px, edit total21px, mobile section25px, product28–36px, editorial29/35px, mobile hero37px and desktop hero36–56px. Main photo field ratio1.16 desktop/1.05 mobile. Confirmation uses forest `#354b37`; original paper/paprika identity is preserved.
+
+<div dir="rtl" align="right">أصبحت الكمية رقمًا واحدًا دون مربعات؛ مؤشر لوحة المفاتيح خط داكن فقط. الحركة قصيرة ولها سبب مرتبط بصورة أو إضافة أو نافذة، دون حلقات مستمرة. التنقل ظاهر على الجوال والمعرض أصغر. تعرض توليفات المكتب منتجات موجودة وأسعارها المشتقة من الكتالوج دون ادعاء خصم.</div>

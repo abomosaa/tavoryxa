@@ -1,4 +1,5 @@
-import { Heart, Plus, ArrowUpRight } from 'lucide-react';
+import { Heart, Plus, ArrowUpRight, Check } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import type { Product, Lang } from './catalogue';
 import { ProductMedia } from './ProductMedia';
 import { productHref } from './storefront';
@@ -15,10 +16,16 @@ export function ProductCard({
   lang: Lang;
   saved: boolean;
   onSave: (id: string) => void;
-  onAdd: (p: Product) => void;
+  onAdd: (p: Product) => boolean | void;
   money: (c: number) => string;
 }) {
   const ar = lang === 'ar';
+  const [added, setAdded] = useState(false);
+  useEffect(() => {
+    if (!added) return;
+    const timer = setTimeout(() => setAdded(false), 1400);
+    return () => clearTimeout(timer);
+  }, [added]);
   return (
     <article className="product">
       <div className={`product-frame tone-${p.category}`}>
@@ -52,11 +59,13 @@ export function ProductCard({
           <p>{p.material[lang]}</p>
         </a>
         <button
-          className="add-button"
-          onClick={() => onAdd(p)}
+          className={`add-button ${added ? 'just-added' : ''}`}
+          onClick={() => {
+            if (onAdd(p) !== false) setAdded(true);
+          }}
           aria-label={ar ? `أضف ${p.name.ar}` : `Add ${p.name.en}`}
         >
-          <Plus size={19} />
+          {added ? <Check size={19} /> : <Plus size={19} />}
         </button>
       </div>
       <p className="price">{money(p.price)}</p>

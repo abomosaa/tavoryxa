@@ -1,3 +1,11 @@
+## 2026-10-25 — Quantity, pricing and motion / الكمية والأسعار والحركة
+
+<div dir="rtl" align="right">الوكيل الرئيسي بسّط الكمية إلى رقم مع زري الزيادة والنقصان، وأزال إطار الرقم مع إبقاء مؤشر لوحة مفاتيح تحته. خُفضت الأسعار التقديرية ووُحدت بين المصدر وSupabase دون تغيير الطلب القديم. أضاف توليفات المكتب وتنقل الجوال وصغّر معرض الصور وحسّن البحث ورأس الصفحة وأدخل حركة محدودة تحترم تقليل الحركة. اكتشف الفحص تمددًا عند820بكسل بسبب خلفية رأس الصفحة وأُصلح. راجع وكيل Qirvexa المصدر والصور باللغتين دون موانع نشر في نطاق مراجعته.</div>
+
+Lead: numeric stepper with no presets/number box, lower canonical catalogue prices, real three-SKU desk combinations, compact gallery, mobile navigation, sticky header/filters, clear-search action and purposeful motion. The 820px header pseudo-element overflow found by tests was fixed. The Qirvexa agent independently reviewed source and settled desktop/mobile screenshots without blockers at that scope.
+
+Validation:19 source tests, build/format,32 new responsive cases plus18 storefront cases; gallery/focus/fallback/shopping and Auth/PKCE/isolation fixtures pass. Webforge local audit99 with no high accessibility issues or overflow (bounded automated audit, not Lighthouse/field evidence). Detector:0 primary findings,74 palette/type documentation advisories before documentation refresh. Live SQL canonical-price/forgery assertions passed inside rollback; existing order fingerprint stayed `970132442b0f63825eee07ec845f8d8c`. No real order/payment submitted.
+
 # Change log / سجل التغييرات
 
 ## 2026-10-23 — Expanded local storefront / توسعة المتجر محليًا

@@ -9,10 +9,10 @@ create table public.tavoryxa_products (
  name_ar text not null, name_en text not null
 );
 insert into public.tavoryxa_products values
-('notebook',6500,'دفتر البدايات','The daily notebook'),('tray',8900,'صينية التفاصيل','The catch-all tray'),
-('pen',4500,'قلم الفكرة','The everyday pen'),('calendar',5500,'تقويم على مهل','The slow calendar'),
-('cup',7500,'حامل الأقلام','The pencil vessel'),('clips',2900,'مشابك صغيرة','The brass clips'),
-('mat',11900,'بساط التركيز','The focus mat'),('notes',3900,'أوراق عابرة','The little notes');
+('notebook',2900,'دفتر البدايات','The daily notebook'),('tray',3900,'صينية التفاصيل','The catch-all tray'),
+('pen',1200,'قلم الفكرة','The everyday pen'),('calendar',2900,'تقويم على مهل','The slow calendar'),
+('cup',3500,'حامل الأقلام','The pencil vessel'),('clips',900,'مشابك صغيرة','The brass clips'),
+('mat',5900,'بساط التركيز','The focus mat'),('notes',1900,'أوراق عابرة','The little notes');
 alter table public.tavoryxa_products enable row level security;
 revoke all on public.tavoryxa_products from anon, authenticated;
 grant select on public.tavoryxa_products to anon, authenticated;
