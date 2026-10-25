@@ -1,3 +1,7 @@
+### Windows scrollbar follow-up / متابعة شريط تمرير Windows
+
+Final live-browser review caught an 8px overflow that the headless default hidden-scrollbar checks missed. Replaced the 100vw header pseudo-element with a normal full-width padded header. The regression now keeps native scrollbars visible and compares scrollWidth with clientWidth, passing all32 cases. / كشف المتصفح الفعلي تمددًا بمقدار8بكسل لم يظهر عند إخفاء شريط التمرير؛ أزيلت خلفية100vw المسببة له، وأصبح الفحص يُظهر شريط Windows ويقارن بعرض المحتوى الفعلي، ونجحت الحالات32.
+
 ## 2026-10-25 — Quantity, pricing and motion / الكمية والأسعار والحركة
 
 <div dir="rtl" align="right">الوكيل الرئيسي بسّط الكمية إلى رقم مع زري الزيادة والنقصان، وأزال إطار الرقم مع إبقاء مؤشر لوحة مفاتيح تحته. خُفضت الأسعار التقديرية ووُحدت بين المصدر وSupabase دون تغيير الطلب القديم. أضاف توليفات المكتب وتنقل الجوال وصغّر معرض الصور وحسّن البحث ورأس الصفحة وأدخل حركة محدودة تحترم تقليل الحركة. اكتشف الفحص تمددًا عند820بكسل بسبب خلفية رأس الصفحة وأُصلح. راجع وكيل Qirvexa المصدر والصور باللغتين دون موانع نشر في نطاق مراجعته.</div>

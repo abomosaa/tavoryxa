@@ -11,6 +11,8 @@ html {
   scrollbar-color: #bdb5a4 var(--paper);
 }
 .header {
+  width: 100%;
+  padding-inline: max(48px, calc((100% - 1280px) / 2));
   position: sticky;
   top: 0;
   z-index: 10;
@@ -18,15 +20,7 @@ html {
   min-height: 88px;
 }
 .header::before {
-  content: '';
-  position: absolute;
-  inset-block: 0;
-  left: 50%;
-  width: 100vw;
-  transform: translateX(-50%);
-  background: var(--paper);
-  z-index: -1;
-  border-bottom: 1px solid var(--line);
+  display: none;
 }
 .header nav a,
 .header nav button {
@@ -505,6 +499,9 @@ html[lang='en'] .desk-edit h2 {
   }
 }
 @media (max-width: 1100px) {
+  .header {
+    padding-inline: 28px;
+  }
   .desk-edit {
     gap: 32px;
     grid-template-columns: 1fr 1fr;
@@ -529,6 +526,7 @@ html[lang='en'] .desk-edit h2 {
     gap: 0 8px;
     min-height: 0;
     padding-top: 12px;
+    padding-inline: 18px;
   }
   .header nav {
     display: flex;

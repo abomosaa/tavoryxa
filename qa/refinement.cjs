@@ -4,7 +4,11 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const base = process.env.BASE_URL || 'http://127.0.0.1:5175';
 (async () => {
-  const browser = await chromium.launch({ channel: 'msedge', headless: true });
+  const browser = await chromium.launch({
+    channel: 'msedge',
+    headless: true,
+    ignoreDefaultArgs: ['--hide-scrollbars'],
+  });
   const errors = [];
   const context = await browser.newContext({ viewport: { width: 1440, height: 1000 } });
   await context.route('**/*', (r) =>
@@ -75,7 +79,9 @@ const base = process.env.BASE_URL || 'http://127.0.0.1:5175';
           await page.goto(`${base}/${hash}`);
           await page.locator('header').waitFor();
           assert.equal(
-            await page.evaluate(() => document.documentElement.scrollWidth > innerWidth),
+            await page.evaluate(
+              () => document.documentElement.scrollWidth > document.documentElement.clientWidth,
+            ),
             false,
             `${language}/${width}/${hash}`,
           );
