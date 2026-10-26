@@ -29,6 +29,5 @@ Verification / التحقق
  * Automated Tests: 19 source tests covering production builds, formatting, and critical store paths.
  * E2E & Layout Quality: Validated across 32 combinations of routes, languages, viewports (360px to 1440px), and motion settings via Playwright (qa/refinement.cjs & qa/storefront.cjs).
  * Data & Auth Integrity: Verified backend RPC pricing calculations, transaction rollbacks, and secure session isolation.
- * 
 
 ![Product page](qa/refinement/product-en-desktop.png)
