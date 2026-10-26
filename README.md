@@ -51,5 +51,3 @@ Routes: `#collection`, `#story`, `#/saved`, and `#/product/notebook` (plus the o
 Browser fixtures require Playwright via `PLAYWRIGHT_MODULE` and a local server via `BASE_URL`. Tests in `qa/refinement.cjs` and `qa/storefront.cjs` block external traffic.
 
 ![Product page](qa/refinement/product-en-desktop.png)
-
-See [DESIGN.md](DESIGN.md), [REVIEW.md](REVIEW.md), [CHANGELOG.md](CHANGELOG.md), [ASSETS.md](ASSETS.md) and [COMMERCE_SETUP.md](COMMERCE_SETUP.md).
