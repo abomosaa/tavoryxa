@@ -1,10 +1,6 @@
 
 Tavoryxa — مساحة ليومك
 
-Make Room for Your Day
-
-""Validate" (https://github.com/abomosaa/tavoryxa/actions/workflows/ci.yml/badge.svg)" (https://github.com/abomosaa/tavoryxa/actions/workflows/ci.yml)
-
 "زيارة المتجر | Visit Store" (https://tavoryxa.qirvexa.workers.dev)
 
 نبذة عن المشروع
