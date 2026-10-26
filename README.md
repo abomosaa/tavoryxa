@@ -1,33 +1,71 @@
-Tavoryxa — مساحة ليومك / Make room for your day
-Validate
-Visit Tavoryxa
-<div dir="rtl" align="right">
-متجر إلكتروني ثنائي اللغة (عربي/إنجليزي) متخصص في الأدوات والقطع المكتبية، يتميز بهوية ورقية دافئة وتصوير واضح للمنتجات وتجربة تصفح سريعة ومستجيبة. يتيح الموقع استكشاف المنتجات، البحث والتصفية، إدارة السلة والمفضلة، وإتمام الطلبات ومتابعة سجلها.
-أبرز التحديثات والمميزات:
- * تجربة واجهة مخصصة: اختيار مرن للكميات، أسعار محدثة (تترواح بين 9 و59 ريالاً)، عرض مصغرات صور محسّن، وشريط تنقل سلس مخصص للهواتف المحمولة.
- * توليفات ومجموعات مكتبية: إمكانية إضافة حزم منتجات متكاملة إلى السلة مباشرة بأسعارها الحالية.
- * تفاعلات وانتقالات بصرية: حركة افتتاحية للصور، تنقل ديناميكي في المعرض، وإشعارات تأكيد سريعة، مع دعم كامل لتقليل الحركة (Reduced Motion).
- * إدارة الحسابات والجلسات: حفظ السلة والمفضلة والطلبات محلياً على جهاز الزائر، مع إمكانية تسجيل الدخول عبر Google لمزامنة الطلبات سحابياً وأمان تام عبر Supabase.
-</div>
-An Arabic-first and English storefront for premium desk objects and stationery. Built with a warm paper-inspired aesthetic, responsive image pipeline, interactive product galleries, search, category filtering, persistent shopping bag, and order management.
-Key Features
- * Intuitive Shopping Experience: Streamlined product detail routes, image zoom/crop, dynamic filtering, and custom bundle additions.
- * Mobile-Optimized: Clean, responsive navigation designed specifically for mobile and desktop screens.
- * Account & Guest Workflows: Local storage persistence for guest sessions, with seamless Google OAuth authentication and secure Supabase-backed order isolation for registered users.
- * Accessible Design: Fluid interactions and micro-animations with full support for system prefers-reduced-motion settings.
-Run / التشغيل
+
+Tavoryxa — مساحة ليومك
+
+Make Room for Your Day
+
+""Validate" (https://github.com/abomosaa/tavoryxa/actions/workflows/ci.yml/badge.svg)" (https://github.com/abomosaa/tavoryxa/actions/workflows/ci.yml)
+
+"زيارة المتجر | Visit Store" (https://tavoryxa.qirvexa.workers.dev)
+
+نبذة عن المشروع
+
+Tavoryxa متجر إلكتروني عصري للمنتجات المكتبية، يجمع بين البساطة والأناقة وتجربة تسوق سلسة باللغتين العربية والإنجليزية.
+
+يتميز بتصميم دافئ ومتجاوب يناسب الجوال والكمبيوتر، مع اهتمام بالتفاصيل وسهولة الاستخدام.
+
+المميزات
+
+- عرض المنتجات مع معرض صور تفاعلي وتكبير التفاصيل.
+- البحث والتصفية حسب الفئات وترتيب المنتجات.
+- سلة تسوق تفاعلية مع التحكم بالكميات.
+- قائمة مفضلة وسجل للطلبات.
+- مجموعات مكتبية مختارة لتسهيل التسوق.
+- تسجيل الدخول باستخدام Google.
+- حفظ بيانات المستخدم ومزامنة الطلبات عبر Supabase.
+- حركات وانتقالات سلسة مع دعم تقليل الحركة.
+- دعم كامل للعربية والإنجليزية.
+
+التقنيات
+
+React · TypeScript · Supabase · Playwright
+
+التشغيل محليًا
+
 npm ci
 npm run dev
-npm run build
-npm test
-npm run format:check
 
-Copy .env.example to .env.local and configure the public Supabase URL and publishable key.
-For a new database setup, run supabase/001_tavoryxa.sql. For catalogue updates, use supabase/reprice-catalogue.sql. The server RPC handles server-side price validation, owner authentication check, and request idempotency.
-Routes: #collection, #story, #/saved, and #/product/notebook (along with all catalog product IDs).
-Verification / التحقق
- * Automated Tests: 19 source tests covering production builds, formatting, and critical store paths.
- * E2E & Layout Quality: Validated across 32 combinations of routes, languages, viewports (360px to 1440px), and motion settings via Playwright (qa/refinement.cjs & qa/storefront.cjs).
- * Data & Auth Integrity: Verified backend RPC pricing calculations, transaction rollbacks, and secure session isolation.
+لإعداد قاعدة البيانات، راجع ".env.example" وملفات "supabase/".
 
+«المتجر حاليًا في مرحلة العرض، وتتوفر تجربة إنشاء الطلبات دون معالجة مدفوعات فعلية.»
+
+---
+
+About Tavoryxa
+
+Tavoryxa is a modern bilingual storefront for thoughtfully selected desk essentials, combining elegant design with a smooth shopping experience.
+
+Features
+
+- Interactive product galleries with image zoom.
+- Product search, filtering, and sorting.
+- Shopping cart with quantity controls.
+- Wishlists and order history.
+- Curated desk collections.
+- Google authentication and Supabase integration.
+- Responsive design for mobile and desktop.
+- Smooth animations with reduced-motion support.
+- Full Arabic and English support.
+
+Getting Started
+
+npm ci
+npm run dev
+
+Configure the environment using ".env.example".
+
+Checkout is currently available in demonstration mode without live payment processing.
+
+---
+
+"Tavoryxa Product Page" (qa/refinement/product-en-desktop.png)
 ![Product page](qa/refinement/product-en-desktop.png)
