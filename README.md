@@ -1,7 +1,7 @@
 Tavoryxa — مساحة ليومك 
 
 ---
-
+فيديو تعريفي
 https://github.com/user-attachments/assets/0ba0e503-fdcb-494d-a8ed-8ac36da82bd1
 ---
 **[زيارة المتجر | Visit Store](https://tavoryxa.qirvexa.workers.dev)**
