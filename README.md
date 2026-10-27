@@ -1,3 +1,11 @@
+<div dir="rtl" align="right">شاهد Tavoryxa خلال 28 ثانية · عرض عربي بدقة 1080p</div>
+
+https://github.com/user-attachments/assets/0ba0e503-fdcb-494d-a8ed-8ac36da82bd1
+
+**[زيارة المتجر | Visit Store](https://tavoryxa.qirvexa.workers.dev)**
+
+---
+
 
 Tavoryxa — مساحة ليومك
 

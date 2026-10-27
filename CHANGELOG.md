@@ -89,3 +89,6 @@ Implemented by `portfolio_research_review` (requested GPT-6.1-sol High); edited 
 - Main agent reports live SQL isolation/pricing/idempotency assertions passed and test transaction rolled back. No live SQL mutation was performed by this author.
 
 <div dir="rtl" align="right">أُزيلت علامة التسجيل غير المثبتة، وأُضيف تحقق للطلبات المخزنة وحماية من نتائج الحسابات السابقة وتحديد التقويم. نجحت الاختبارات التسعة واختبارات المتصفح الخاصة بتبديل الحساب وتأخر الاستجابة والبيانات التالفة بعد إعادة البناء. اختبار SQL السحابي أجراه الوكيل الرئيسي وأبلغ بنجاحه والتراجع عن بياناته.</div>
+## 2026-10-27 — Product film / فيديو العرض
+
+- Lead agent placed the Arabic 28-second, 1080p product film at the top of the README with a native GitHub video player and a live store link. A 6.13 MB upload edition preserves the original high-quality master. Application code and deployment are unchanged. / وضع الوكيل الرئيسي فيديو العرض العربي في أعلى README مع مشغل GitHub ورابط المتجر، بنسخة رفع مضغوطة مع الاحتفاظ بالأصل ودون تغيير التطبيق أو نشره.
