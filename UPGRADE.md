@@ -21,7 +21,7 @@ The network seed completed successfully after the first sandbox-only request deg
 - 19 unit tests pass, including safe route parsing, malformed wishlist recovery, bounded quantities and old-price preservation during re-add. TypeScript and production build pass.
 - `qa/storefront.cjs` blocks external traffic and passed photo loading, arrow sizing, deep links, detail crop, zoom keyboard/focus return, wishlist persistence, quantities, simulated checkout, order detail/re-add, missing route and failed-image fallback. Arabic/English checked at 390/820/1440px without horizontal overflow or page errors.
 - Existing shopping, account-isolation, form and real-SDK PKCE fixtures passed after integration. They do not constitute a fresh live Google/mail test or commercial-order acceptance.
-- Review screenshots/results are in `qa/upgrade/`. Independent main-agent review and deployment remain separate gates. Root requested cleanup of global demo banners, hero fallback, repeated description and responsive image sizes; these source corrections are implemented and included in final verification.
+- Review screenshots/results are in `qa/upgrade/`. Independent review and deployment remain separate gates. Root requested cleanup of global demo banners, hero fallback, repeated description and responsive image sizes; these source corrections are implemented and included in final verification.
 
 <div dir="rtl" align="right">
 
