@@ -4,9 +4,9 @@ Final live-browser review caught an 8px overflow that the headless default hidde
 
 ## 2026-10-25 — Quantity, pricing and motion / الكمية والأسعار والحركة
 
-<div dir="rtl" align="right">الوكيل الرئيسي بسّط الكمية إلى رقم مع زري الزيادة والنقصان، وأزال إطار الرقم مع إبقاء مؤشر لوحة مفاتيح تحته. خُفضت الأسعار التقديرية ووُحدت بين المصدر وSupabase دون تغيير الطلب القديم. أضاف توليفات المكتب وتنقل الجوال وصغّر معرض الصور وحسّن البحث ورأس الصفحة وأدخل حركة محدودة تحترم تقليل الحركة. اكتشف الفحص تمددًا عند820بكسل بسبب خلفية رأس الصفحة وأُصلح. راجع وكيل Qirvexa المصدر والصور باللغتين دون موانع نشر في نطاق مراجعته.</div>
+<div dir="rtl" align="right">بُسّطت الكمية إلى رقم مع زري الزيادة والنقصان، وأزال إطار الرقم مع إبقاء مؤشر لوحة مفاتيح تحته. خُفضت الأسعار التقديرية ووُحدت بين المصدر وSupabase دون تغيير الطلب القديم. أضاف توليفات المكتب وتنقل الجوال وصغّر معرض الصور وحسّن البحث ورأس الصفحة وأدخل حركة محدودة تحترم تقليل الحركة. اكتشف الفحص تمددًا عند820بكسل بسبب خلفية رأس الصفحة وأُصلح. رُوجع المصدر والصور باللغتين.</div>
 
-Lead: numeric stepper with no presets/number box, lower canonical catalogue prices, real three-SKU desk combinations, compact gallery, mobile navigation, sticky header/filters, clear-search action and purposeful motion. The 820px header pseudo-element overflow found by tests was fixed. The Qirvexa agent independently reviewed source and settled desktop/mobile screenshots without blockers at that scope.
+Lead: numeric stepper with no presets/number box, lower canonical catalogue prices, real three-SKU desk combinations, compact gallery, mobile navigation, sticky header/filters, clear-search action and purposeful motion. The 820px header pseudo-element overflow found by tests was fixed. An independent review covered source and settled desktop/mobile screenshots without blockers at that scope.
 
 Validation:19 source tests, build/format,32 new responsive cases plus18 storefront cases; gallery/focus/fallback/shopping and Auth/PKCE/isolation fixtures pass. Webforge local audit99 with no high accessibility issues or overflow (bounded automated audit, not Lighthouse/field evidence). Detector:0 primary findings,74 palette/type documentation advisories before documentation refresh. Live SQL canonical-price/forgery assertions passed inside rollback; existing order fingerprint stayed `970132442b0f63825eee07ec845f8d8c`. No real order/payment submitted.
 
@@ -22,7 +22,7 @@ The lead reviewed collection/product/order screenshots and source. Confirmed ima
 
 First public Webforge acceptance scored 99 with no high accessibility findings or responsive overflow. Heuristic low issues were reviewed separately from actual usability. This score is an automated design audit, not a Lighthouse or field-performance measurement.
 
-<div dir="rtl" align="right">أُصلحت الصور واتجاه النص، وأضيفت صفحات المنتجات والمعرض والمفضلة وسجل الطلبات. نجح 19 اختبارًا والبناء وفحوص المتصفح بالعربية والإنجليزية وثلاثة أحجام. أُضيفت بيانات توصيل تقديرية بموافقة المستخدم دون تفعيل بيع أو شحن غير مؤكد. راجع الوكيل الرئيسي النتائج والمصدر، واكتملت الاختبارات المستهدفة بعد تكبير النصوص.</div>
+<div dir="rtl" align="right">أُصلحت الصور واتجاه النص، وأضيفت صفحات المنتجات والمعرض والمفضلة وسجل الطلبات. نجح 19 اختبارًا والبناء وفحوص المتصفح بالعربية والإنجليزية وثلاثة أحجام. أُضيفت بيانات توصيل تقديرية بموافقة المستخدم دون تفعيل بيع أو شحن غير مؤكد. رُوجعت النتائج والمصدر، واكتملت الاختبارات المستهدفة بعد تكبير النصوص.</div>
 
 ## Local upgrade verification — 2026-10-23 / تحقق التوسعة المحلية
 
@@ -34,8 +34,8 @@ Eight IDs, prices, old order parsing, saved financial values and canonical RPC a
 
 ## Current live verification — 2026-10-23 / التحقق الفعلي الحالي
 
-- Main-agent verification: real Google OAuth succeeded after the user selected the authorized owner account. The retest returned to the correct Tavoryxa origin and showed the cloud connection.
-- The first callback had fallen back to Qirvexa because the storefront's trailing-slash origin was absent from the allowlist. The main agent saved six exact Supabase redirect URLs: the previous four plus both deployed origins ending in `/`. No backend schema, IP or SMTP change accompanied the retest.
+- Verification: real Google OAuth succeeded after the user selected the authorized owner account. The retest returned to the correct Tavoryxa origin and showed the cloud connection.
+- The first callback had fallen back to Qirvexa because the storefront's trailing-slash origin was absent from the allowlist. The configuration includes six exact Supabase redirect URLs: the previous four plus both deployed origins ending in `/`. No backend schema, IP or SMTP change accompanied the retest.
 - Created simulated cloud order `#B8290AF4`: one notebook, SAR 83 total. Reload and order history retained the cloud record. No payment or shipment occurred.
 - Signed out through the interface: guest history showed previous local order `#68DA4835` only, without the cloud order; guest browsing remained available.
 - Email delivery is unverified and its gate remains false; GitHub remains disabled. Brevo setup is deferred by the user. Google remains **Testing**, with no In Production or verified-brand claim. Its [basic-identity exception](https://support.google.com/cloud/answer/15549945?hl=en) applies only to identity scopes, allowing access without the test-user list or seven-day authorization expiry.
@@ -43,13 +43,13 @@ Eight IDs, prices, old order parsing, saved financial values and canonical RPC a
 
 <div dir="rtl" align="right">
 
-تحقق الوكيل الرئيسي من دخول Google الحقيقي بالحساب المصرح به والعودة إلى المتجر الصحيح، بعد إضافة عنوانَي الموقعين المنتهيين بشرطة مائلة إلى قائمة العودة ليصبح مجموعها ستة عناوين. حُفظ الطلب السحابي التجريبي `#B8290AF4` لدفتر واحد بإجمالي 83 ريالًا وظهر بعد إعادة التحميل، دون دفع أو شحن. بعد الخروج ظهر الطلب المحلي السابق `#68DA4835` فقط ولم يظهر الطلب السحابي في سجل الضيف. إرسال البريد غير متحقق وبوابة التسجيل والاستعادة بالبريد معطلة، وGitHub معطل، وإعداد Brevo مؤجل بطلب المستخدم. Google في Testing دون ادعاء توثيق العلامة أو النشر العام؛ استثناء الهوية الأساسية المرتبط أعلاه مشروط بعدم طلب صلاحيات إضافية. بقيت إعدادات قاعدة البيانات وIP وSMTP دون تغيير أثناء إعادة الاختبار.
+تم التحقق من دخول Google الحقيقي بالحساب المصرح به والعودة إلى المتجر الصحيح، بعد إضافة عنوانَي الموقعين المنتهيين بشرطة مائلة إلى قائمة العودة ليصبح مجموعها ستة عناوين. حُفظ الطلب السحابي التجريبي `#B8290AF4` لدفتر واحد بإجمالي 83 ريالًا وظهر بعد إعادة التحميل، دون دفع أو شحن. بعد الخروج ظهر الطلب المحلي السابق `#68DA4835` فقط ولم يظهر الطلب السحابي في سجل الضيف. إرسال البريد غير متحقق وبوابة التسجيل والاستعادة بالبريد معطلة، وGitHub معطل، وإعداد Brevo مؤجل بطلب المستخدم. Google في Testing دون ادعاء توثيق العلامة أو النشر العام؛ استثناء الهوية الأساسية المرتبط أعلاه مشروط بعدم طلب صلاحيات إضافية. بقيت إعدادات قاعدة البيانات وIP وSMTP دون تغيير أثناء إعادة الاختبار.
 
 </div>
 
 ## Historical release checkpoint — 2026-10-22 / نقطة الإصدار التاريخية
 
-The main agent completed review of the authentication source, immutable recovery-owner Bearer and 15-second recovery request timeout. Auth release [5bfbfb1](https://github.com/abomosaa/tavoryxa/commit/5bfbfb1) is deployed as Cloudflare version `5f9b5286-19b1-4c58-8482-6afe12e03efb`; [CI 39772228693 succeeded](https://github.com/abomosaa/tavoryxa/actions/runs/39772228693).
+The review covered the authentication source, immutable recovery-owner Bearer and 15-second recovery request timeout. Auth release [5bfbfb1](https://github.com/abomosaa/tavoryxa/commit/5bfbfb1) is deployed as Cloudflare version `5f9b5286-19b1-4c58-8482-6afe12e03efb`; [CI 39772228693 succeeded](https://github.com/abomosaa/tavoryxa/actions/runs/39772228693).
 
 At this 2026-10-22 checkpoint, live email delivery and Google/GitHub OAuth were unverified, the email-delivery gate was false and both external providers were disabled. Brevo had been chosen (300 emails/day), with sender verification and direct SMTP setup pending. The 2026-10-23 section above supersedes this provider-test status; the historical original baseline below is preserved.
 
@@ -64,9 +64,9 @@ The lead inspected the newly deployed Arabic account panel: email/password sign-
 - Installed SDK fixture: `qa/auth-pkce.cjs` uses the real pinned Supabase SDK, intercepts all Auth requests, initiates PKCE reset, exchanges the callback, receives recovery before/around React startup, completes the fixed-owner password PUT and cleans the callback URL.
 - Existing shopping and auth-isolation browser packets passed after integration. Screenshots `qa/auth/` were inspected at mobile size.
 - Root's cross-tab recovery review finding was addressed by avoiding mutable singleton `updateUser()` for password mutation. The event owner/token is captured in memory and checked before a fixed-Bearer request.
-- External at this local-test checkpoint: no live registration/reset email or Google/GitHub completion was performed by this author. Delivery gate was false. Source review/deployment was completed by the main agent; subsequent live Google verification is recorded in the 2026-10-23 section above.
+- External at this local-test checkpoint: no live registration/reset email or Google/GitHub completion was performed by this author. Delivery gate was false. Source review/deployment was completed during review; subsequent live Google verification is recorded in the 2026-10-23 section above.
 
-<div dir="rtl" align="right">نجحت فحوص المصدر و15 اختبارًا وفحوص النماذج وPKCE عبر الشبكة التجريبية وعزل الحسابات والشراء. عولجت ملاحظة تبديل الحساب بربط تعديل كلمة المرور بجلسة الاستعادة الثابتة. لم ينفذ هذا الوكيل بريدًا أو OAuth فعليًا ضمن تلك الفحوص المحلية؛ أكمل الوكيل الرئيسي المراجعة والنشر ثم تحقق من Google في 23 أكتوبر كما هو موثق أعلاه.</div>
+<div dir="rtl" align="right">نجحت فحوص المصدر و15 اختبارًا وفحوص النماذج وPKCE عبر الشبكة التجريبية وعزل الحسابات والشراء. عولجت ملاحظة تبديل الحساب بربط تعديل كلمة المرور بجلسة الاستعادة الثابتة. لم تشمل الفحوص المحلية البريد أو OAuth الفعلي؛ اكتملت المراجعة والنشر والتحقق من Google في 23 أكتوبر كما هو موثق أعلاه.</div>
 
 ## Author verification — 2026-10-21 / تحقق المنفذ
 
@@ -84,11 +84,11 @@ The lead inspected the newly deployed Arabic account panel: email/password sign-
 | SQL source self-review      | No price/owner/status input; private privileged writer, explicit auth, fixed path, owner read RLS, no direct writes, idempotent request ID / مراجعة المصدر لحدود الصلاحية والأسعار والتكرار                                                                                                                                              |
 | Auth-race regression        | Browser-only Supabase stub: late getUser, sign-out during fetch, account change during checkout and malformed persisted orders all pass / اختبار معزول ناجح لتأخر الاستجابات وتبديل الحساب والبيانات التالفة                                                                                                                             |
 | Production dependency audit | `npm audit --omit=dev`: zero reported vulnerabilities / لا ثغرات مُبلّغ عنها في اعتماديات الإنتاج                                                                                                                                                                                                                                        |
-| Live SQL                    | Main agent reports applied on approved new backend, security advisors empty, transactional assertions passed and rolled back: owner-read, crossuser isolation, forged prices ignored, retry ID stable, negative quantity rejected / أبلغ الوكيل الرئيسي بنجاح اختبارات الأسعار والعزل والتكرار على السحابة مع التراجع عن بيانات الاختبار |
+| Live SQL                    | Reported checks on approved new backend, security advisors empty, transactional assertions passed and rolled back: owner-read, crossuser isolation, forged prices ignored, retry ID stable, negative quantity rejected / نجحت اختبارات الأسعار والعزل والتكرار على السحابة مع التراجع عن بيانات الاختبار |
 | Live OAuth                  | Pending provider configuration; remains visibly disabled / بانتظار إعداد مقدم الخدمة ويظهر الدخول معطلًا بوضوح                                                                                                                                                                                                                           |
 
 ## Mutual review / المراجعة المتبادلة
 
-Main agent reviewed source/SQL and requested four fixes: unverified registered-trademark symbol, malformed local orders, stale asynchronous auth/order state, and explicit Gregorian formatting. The author removed the symbol, validated order shapes, added auth generation/unmount guards and private-state clearing, and set the calendar explicitly. Build, nine unit tests, shopping browser flow and the four targeted race/storage browser checks passed after fixes. Final reviewer visual/deployment acceptance remains separate.
+Source and SQL review identified four fixes: unverified registered-trademark symbol, malformed local orders, stale asynchronous auth/order state, and explicit Gregorian formatting. The author removed the symbol, validated order shapes, added auth generation/unmount guards and private-state clearing, and set the calendar explicitly. Build, nine unit tests, shopping browser flow and the four targeted race/storage browser checks passed after fixes. Final reviewer visual/deployment acceptance remains separate.
 
-<div dir="rtl" align="right">راجع الوكيل الرئيسي المصدر وSQL وطلب إزالة علامة تسجيل تجاري غير مثبتة، والتحقق من الطلبات المخزنة، وحماية حالة الحساب من الاستجابات المتأخرة، وتحديد التقويم. أُصلحت الأربع وأُعيد البناء و9 اختبارات وفحص الشراء واختبارات الحساب والبيانات التالفة بنجاح. يبقى اعتماد المراجع البصري والنشر منفصلين.</div>
+<div dir="rtl" align="right">شملت مراجعة المصدر وSQL إزالة علامة تسجيل تجاري غير مثبتة، والتحقق من الطلبات المخزنة، وحماية حالة الحساب من الاستجابات المتأخرة، وتحديد التقويم. أُصلحت الأربع وأُعيد البناء و9 اختبارات وفحص الشراء واختبارات الحساب والبيانات التالفة بنجاح. يبقى اعتماد المراجع البصري والنشر منفصلين.</div>
