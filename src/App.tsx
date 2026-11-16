@@ -41,6 +41,7 @@ import { HeroMedia, ProductMedia } from './ProductMedia';
 import { parseStoreRoute, savedProducts, repeatOrder, productHref } from './storefront';
 import { commerceEstimate } from './commerce';
 import { DeskEdit } from './DeskEdit';
+import { DeskGuide } from './DeskGuide';
 type Panel = 'cart' | 'checkout' | 'orders' | 'account' | 'confirmation' | null;
 function Modal({
   children,
@@ -697,6 +698,7 @@ export default function App() {
               )}
             </section>
             <DeskEdit lang={lang} money={money} onAdd={addCombination} />
+            <DeskGuide lang={lang} />
             <section className="story wrap" id="story">
               <div className="story-art">
                 <ProductMedia product={products[7]} lang={lang} />

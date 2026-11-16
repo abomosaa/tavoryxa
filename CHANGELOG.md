@@ -90,3 +90,10 @@ Validation:19 source tests, build/format,32 new responsive cases plus18 storefro
 ## 2026-10-27 — Product film / فيديو العرض
 
 - The README includes the Arabic 28-second, 1080p product film at the top of the README with a native GitHub video player and a live store link. A 6.13 MB upload edition preserves the original high-quality master. Application code and deployment are unchanged. / وُضع فيديو العرض العربي في أعلى README مع مشغل GitHub ورابط المتجر، بنسخة رفع مضغوطة مع الاحتفاظ بالأصل ودون تغيير التطبيق أو نشره.
+
+## 2026-11-16 — Desk guide / دليل اختيار القطع
+
+- Added an interactive three-purpose desk guide with actual catalogue photographs, linked product details and changing editorial copy. / دليل تفاعلي بثلاثة استخدامات وصور وروابط المنتجات الفعلية.
+- Added accessible expandable answers about product details, accounts and order confirmation without inventing commercial terms. / أسئلة قابلة للتوسيع تشرح التفاصيل والحساب والطلب.
+- Added short image/copy transitions, photo interaction and explicit reduced-motion alternatives. / انتقالات للصور والنصوص مع دعم تقليل الحركة.
+- Production build, 19 unit tests and six Arabic/English viewport interaction checks passed locally. / نجاح البناء و19 اختبارًا وستة فحوص تفاعل باللغتين وثلاثة أحجام.
