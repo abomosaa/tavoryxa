@@ -24,11 +24,11 @@ export function DeskGuide({ lang }: { lang: Lang }) {
       textEn: 'Give the little things a home and keep your desk clear for the work that matters.',
     },
     {
-      ar: 'لحظة هدوء',
-      en: 'Take a moment',
+      ar: 'أدوات في متناولك',
+      en: 'Keep tools close',
       index: 4,
-      textAr: 'استراحة قصيرة وكوب قريب. امنح يومك إيقاعًا يناسبك.',
-      textEn: 'A short pause and a cup within reach. Find a rhythm that feels like yours.',
+      textAr: 'حامل يجمع أقلامك وأدواتك اليومية. اعثر على ما تحتاجه، وارجع لفكرتك.',
+      textEn: 'A holder for your pens and everyday tools. Find what you need and get back to your idea.',
     },
   ];
   const choice = choices[purpose];
