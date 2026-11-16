@@ -62,7 +62,6 @@ Validation:19 source tests, build/format,32 new responsive cases plus18 storefro
 
 <div dir="rtl" align="right">
 
-
 - توثيق التوجه والمنتج قبل التنفيذ؛ تحليل مرجع محدود عبر Webforge وقراءة إرشادات Impeccable وSupabase وWorkers.
 - إنشاء React/TypeScript/Vite مع منتجات ورسومات SVG محلية وثنائية اللغة.
 - السلة والبحث والفئات والترتيب والتفاصيل والدفع التجريبي والطلبات المحلية وتكامل الحساب السحابي الاختياري.
@@ -71,7 +70,6 @@ Validation:19 source tests, build/format,32 new responsive cases plus18 storefro
 - نجاح البناء وTypeScript و6 اختبارات وفحص المتصفح بالعربية والإنجليزية. التحقق من حسابات السحابة والنشر مسؤولية المراجعة.
 
 </div>
-
 
 - Documented design/product first; bounded Webforge reference analysis and applicable skill review.
 - Built bilingual React/TS/Vite storefront with original SVG objects, complete guest shopping/order flow and optional Supabase/GitHub integration.
@@ -92,6 +90,8 @@ Validation:19 source tests, build/format,32 new responsive cases plus18 storefro
 - The README includes the Arabic 28-second, 1080p product film at the top of the README with a native GitHub video player and a live store link. A 6.13 MB upload edition preserves the original high-quality master. Application code and deployment are unchanged. / وُضع فيديو العرض العربي في أعلى README مع مشغل GitHub ورابط المتجر، بنسخة رفع مضغوطة مع الاحتفاظ بالأصل ودون تغيير التطبيق أو نشره.
 
 ## 2026-11-16 — Desk guide / دليل اختيار القطع
+
+- Enabled email signup and password recovery in the production build after verified Brevo delivery and user receipt confirmation. Google and guest mode remain available. / تفعيل التسجيل بالبريد واستعادة كلمة المرور بعد تحقق التسليم ووصول الرسالة، مع بقاء Google والضيف.
 
 - Added an interactive three-purpose desk guide with actual catalogue photographs, linked product details and changing editorial copy. / دليل تفاعلي بثلاثة استخدامات وصور وروابط المنتجات الفعلية.
 - Added accessible expandable answers about product details, accounts and order confirmation without inventing commercial terms. / أسئلة قابلة للتوسيع تشرح التفاصيل والحساب والطلب.
